@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     13997,        312]
-NotebookOptionsPosition[     13563,        294]
-NotebookOutlinePosition[     13908,        309]
-CellTagsIndexPosition[     13865,        306]
+NotebookDataLength[     14197,        310]
+NotebookOptionsPosition[     13765,        292]
+NotebookOutlinePosition[     14107,        307]
+CellTagsIndexPosition[     14064,        304]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -114,8 +114,7 @@ Cell[BoxData[{
        RowBox[{"args", "=", 
         RowBox[{"{", 
          RowBox[{"Exp", ",", 
-          RowBox[{"I", " ", "\[Pi]"}], ",", "\[Infinity]", ",", "0.01"}], 
-         "}"}]}], ",", 
+          RowBox[{"1", "+", "I"}], ",", "\[Infinity]"}], "}"}]}], ",", 
        RowBox[{"path", "=", 
         RowBox[{"taylorPath", "@", "args"}]}], ",", 
        RowBox[{"labels", "=", 
@@ -125,60 +124,63 @@ Cell[BoxData[{
      "\[IndentingNewLine]", 
      RowBox[{"Table", "[", "\[IndentingNewLine]", 
       RowBox[{
-       RowBox[{"N", "@", 
-        RowBox[{"Graphics", "[", "\[IndentingNewLine]", 
-         RowBox[{
-          RowBox[{"{", 
-           RowBox[{"Thick", ",", "\[IndentingNewLine]", 
-            RowBox[{"{", 
-             RowBox[{
-              RowBox[{"Darker", "[", 
-               RowBox[{"Orange", ",", 
-                RowBox[{"1", "/", "5"}]}], "]"}], ",", 
-              RowBox[{"Circle", "[", "]"}]}], "}"}], ",", 
-            "\[IndentingNewLine]", 
-            RowBox[{"{", 
-             RowBox[{"Arrow", "@", 
-              RowBox[{"path", "\[LeftDoubleBracket]", 
-               RowBox[{";;", "n"}], "\[RightDoubleBracket]"}]}], "}"}], ",", 
-            "\[IndentingNewLine]", 
+       RowBox[{"Graphics", "[", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"Thick", ",", "\[IndentingNewLine]", 
+           RowBox[{"{", 
             RowBox[{
-             RowBox[{"##", "&"}], "@@", 
-             RowBox[{"MapThread", "[", 
+             RowBox[{"Darker", "[", 
+              RowBox[{"Orange", ",", 
+               RowBox[{"1", "/", "5"}]}], "]"}], ",", 
+             RowBox[{"Circle", "[", "]"}]}], "}"}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{"{", 
+            RowBox[{"Arrow", "@", 
+             RowBox[{"path", "\[LeftDoubleBracket]", 
+              RowBox[{";;", "n"}], "\[RightDoubleBracket]"}]}], "}"}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"##", "&"}], "@@", 
+            RowBox[{"MapThread", "[", 
+             RowBox[{
               RowBox[{
-               RowBox[{
-                RowBox[{"Inset", "[", 
-                 RowBox[{
-                  RowBox[{"Style", "[", 
-                   RowBox[{
-                    RowBox[{"TraditionalForm", "@", 
+               RowBox[{"Inset", "[", 
+                RowBox[{
+                 RowBox[{"Style", "[", 
+                  RowBox[{
+                   RowBox[{"TraditionalForm", "@", 
                     RowBox[{"Chop", "@", 
                     RowBox[{"N", "@", "#1"}]}]}], ",", "12", ",", "Black"}], 
-                   "]"}], ",", "#2"}], "]"}], "&"}], ",", 
-               RowBox[{
-                RowBox[{"{", 
-                 RowBox[{"labels", ",", "labelplaces"}], "}"}], 
-                "\[LeftDoubleBracket]", 
-                RowBox[{";;", ",", 
-                 RowBox[{";;", "n"}]}], "\[RightDoubleBracket]"}]}], 
-              "]"}]}]}], "\[IndentingNewLine]", "}"}], ",", 
-          "\[IndentingNewLine]", 
-          RowBox[{"Axes", "\[Rule]", "True"}], ",", "\[IndentingNewLine]", 
-          RowBox[{"PlotLabel", "\[Rule]", 
-           RowBox[{"Style", "[", 
-            RowBox[{
-             RowBox[{"\"\<Vector series of\>\"", "<>", 
-              RowBox[{"ToString", "[", 
+                  "]"}], ",", "#2"}], "]"}], "&"}], ",", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{"labels", ",", "labelplaces"}], "}"}], 
+               "\[LeftDoubleBracket]", 
+               RowBox[{";;", ",", 
+                RowBox[{";;", "n"}]}], "\[RightDoubleBracket]"}]}], "]"}]}]}],
+           "\[IndentingNewLine]", "}"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"Axes", "\[Rule]", "True"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"PlotLabel", "\[Rule]", 
+          RowBox[{"Style", "[", 
+           RowBox[{
+            RowBox[{"\"\<Vector series of\>\"", "<>", 
+             RowBox[{"ToString", "[", 
+              RowBox[{
                RowBox[{
                 RowBox[{
-                 RowBox[{
-                 "args", "\[LeftDoubleBracket]", "1", 
-                  "\[RightDoubleBracket]"}], "[", 
-                 RowBox[{
-                 "args", "\[LeftDoubleBracket]", "2", 
-                  "\[RightDoubleBracket]"}], "]"}], ",", "TraditionalForm"}], 
-               "]"}]}], ",", "15", ",", "Black"}], "]"}]}]}], 
-         "\[IndentingNewLine]", "]"}]}], ",", "\[IndentingNewLine]", 
+                "args", "\[LeftDoubleBracket]", "1", 
+                 "\[RightDoubleBracket]"}], "[", 
+                RowBox[{
+                "args", "\[LeftDoubleBracket]", "2", 
+                 "\[RightDoubleBracket]"}], "]"}], ",", "TraditionalForm"}], 
+              "]"}]}], ",", "15", ",", "Black"}], "]"}]}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"PlotRange", "\[Rule]", 
+          RowBox[{"Max", "@", 
+           RowBox[{"Abs", "@", 
+            RowBox[{"Accumulate", "@", "labels"}]}]}]}]}], 
+        "\[IndentingNewLine]", "]"}], ",", "\[IndentingNewLine]", 
        RowBox[{"{", 
         RowBox[{"n", ",", 
          RowBox[{"Length", "@", "path"}]}], "}"}]}], "\[IndentingNewLine]", 
@@ -223,21 +225,16 @@ Cell[BoxData[{
    3.8089684659804287`*^9}, {3.8089684986642265`*^9, 3.808968500223585*^9}, {
    3.8089685352307262`*^9, 3.8089685793882303`*^9}, {3.8089699027488956`*^9, 
    3.8089699354857244`*^9}, {3.808969982484723*^9, 3.80896998289913*^9}, {
-   3.808970014530653*^9, 3.808970024397444*^9}}],
+   3.808970014530653*^9, 3.808970024397444*^9}, {3.8089775633480377`*^9, 
+   3.8089775712142105`*^9}, {3.808977690017681*^9, 3.808977779465945*^9}, {
+   3.8089778268555117`*^9, 3.8089778434543595`*^9}, {3.8089779178788567`*^9, 
+   3.8089779986262817`*^9}, {3.808978073342552*^9, 3.808978106042035*^9}, 
+   3.8089781969502935`*^9, {3.8089782376884346`*^9, 3.808978240736355*^9}, {
+   3.808978287657711*^9, 3.8089783121054564`*^9}, {3.8089783566437645`*^9, 
+   3.808978387361622*^9}}],
 
 Cell[BoxData[{
- RowBox[{
-  RowBox[{
-   RowBox[{"Last", "@", "imgs"}], "//", "AbsoluteOptions"}], 
-  "\[IndentingNewLine]", 
-  RowBox[{"(*", 
-   RowBox[{"AbsoluteOptions", "[", 
-    RowBox[{
-     RowBox[{"%", "\[LeftDoubleBracket]", 
-      RowBox[{"-", "1"}], "\[RightDoubleBracket]"}], ",", "ImagePadding"}], 
-    "]"}], "*)"}], "\[IndentingNewLine]", 
-  RowBox[{"(*", 
-   RowBox[{"ListAnimate", "@", "%"}], "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{"ListAnimate", "@", "imgs"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"(*", 
    RowBox[{"SystemOpen", "@", 
@@ -290,10 +287,11 @@ Cell[BoxData[{
    3.8089682760511026`*^9}, {3.8089684370988092`*^9, 
    3.8089684659804287`*^9}, {3.8089684986642265`*^9, 3.808968500223585*^9}, {
    3.8089685352307262`*^9, 3.8089685793882303`*^9}, {3.8089699027488956`*^9, 
-   3.808969948462827*^9}, {3.8089700788328342`*^9, 3.8089701010200777`*^9}}]
+   3.808969948462827*^9}, {3.8089700788328342`*^9, 3.8089701010200777`*^9}, {
+   3.808977605342121*^9, 3.808977614301444*^9}}]
 },
-WindowSize->{1920, 1007},
-WindowMargins->{{-8, Automatic}, {Automatic, -8}},
+WindowSize->{958, 998},
+WindowMargins->{{Automatic, -7}, {Automatic, 0}},
 FrontEndVersion->"10.1 for Microsoft Windows (64-bit) (March 23, 2015)",
 StyleDefinitions->"Default.nb"
 ]
@@ -308,12 +306,12 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[558, 20, 306, 5, 31, "Input"],
+Cell[558, 20, 306, 5, 72, "Input"],
 Cell[867, 27, 291, 7, 31, "Input"],
 Cell[1161, 36, 140, 2, 31, "Input"],
-Cell[1304, 40, 2125, 63, 52, "Input"],
-Cell[3432, 105, 6259, 120, 332, "Input"],
-Cell[9694, 227, 3865, 65, 92, "Input"]
+Cell[1304, 40, 2125, 63, 72, "Input"],
+Cell[3432, 105, 6775, 128, 372, "Input"],
+Cell[10210, 235, 3551, 55, 72, "Input"]
 }
 ]
 *)
