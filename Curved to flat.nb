@@ -1,0 +1,281 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      8668,        272]
+NotebookOptionsPosition[      7946,        244]
+NotebookOutlinePosition[      8320,        260]
+CellTagsIndexPosition[      8277,        257]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Playing with curvature in different viewpoints", "Title",
+ CellChangeTimes->{{3.807574868559366*^9, 3.807574880944372*^9}}],
+
+Cell[TextData[{
+ "What is x(t) such that ||\[Alpha]\[CloseCurlyQuote](t)|| is constant, where \
+\[Alpha](t) = (x(t), ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["e", 
+    RowBox[{
+     RowBox[{"-", 
+      RowBox[{
+       RowBox[{"x", "(", "t", ")"}], "^", "2"}]}], "/", "2"}]], 
+   TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ ")?"
+}], "Text",
+ CellChangeTimes->{{3.80776016654589*^9, 3.8077602668226357`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Clear", "@", "y"}], ";", 
+  RowBox[{
+   RowBox[{"y", "[", "t_", "]"}], ":=", 
+   RowBox[{"Exp", "[", 
+    RowBox[{
+     RowBox[{"-", "10"}], 
+     RowBox[{
+      RowBox[{"x", "[", "t", "]"}], "^", "2"}]}], 
+    "]"}]}]}], "\[IndentingNewLine]", 
+ RowBox[{"D", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"x", "[", "t", "]"}], ",", 
+     RowBox[{"y", "[", "t", "]"}]}], "}"}], ",", "t"}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"#", ".", "#"}], "&"}], "@", "%"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"NDSolve", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"%", "\[Equal]", "1"}], "&&", 
+     RowBox[{
+      RowBox[{"x", "[", 
+       RowBox[{"-", "\[Pi]"}], "]"}], "\[Equal]", 
+      RowBox[{"-", "\[Pi]"}]}]}], ",", "x", ",", 
+    RowBox[{"{", 
+     RowBox[{"t", ",", 
+      RowBox[{"-", "\[Pi]"}], ",", "\[Pi]"}], "}"}]}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Animate", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"ParametricPlot", "[", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"x", "[", "t", "]"}], ",", 
+         RowBox[{"y", "[", "t", "]"}]}], "}"}], "/.", 
+       RowBox[{"%", "\[LeftDoubleBracket]", "2", "\[RightDoubleBracket]"}]}], 
+      "//", "Evaluate"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"t", ",", 
+       RowBox[{"-", "\[Pi]"}], ",", "\[Pi]"}], "}"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"ImageSize", "\[Rule]", 
+      RowBox[{"10", "*", "72"}]}], ",", "\[IndentingNewLine]", 
+     RowBox[{"Epilog", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"PointSize", "[", "0.03", "]"}], ",", "Red", ",", 
+        RowBox[{"Point", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"x", "[", "tp", "]"}], ",", "0"}], "}"}], "/.", 
+           RowBox[{
+           "%", "\[LeftDoubleBracket]", "2", "\[RightDoubleBracket]"}]}], "//",
+           "Evaluate"}], "]"}]}], "}"}]}]}], "\[IndentingNewLine]", "]"}], 
+   ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{"tp", ",", 
+     RowBox[{"-", "\[Pi]"}], ",", "\[Pi]"}], "}"}]}], "\[IndentingNewLine]", 
+  "]"}]}], "Input",
+ CellChangeTimes->CompressedData["
+1:eJxTTMoPSmViYGCQAGIQfb/2+KedcW8cfb6eZtgFpB14tyaD6K3CHCkg+ufb
+qGIQ/eBTaQmIllxeWAWiN1Vb1YDonL6kZhBdNPU4mL6k3Ka4G0jv88xUBtE7
+rs7UBNEHWEwMQPSKkwwmIDrqjCCYXjW7xAtEe7B9ANM7pp3yA9EaE34Ggei4
+BUZxIFot/Wo8iJ4R8jIFRH+yq04F0bMe7soB0T3py/JA9IOwLeUg2vHjwgYQ
+nfT2YguI/j730Eyw+ar980D07aKCtSB6zhLRgyD6l6P1YbC7fY7dAbvzw4F7
+IJqh0ekFiH5zWOIliBbS0XsLos9Kh30E0fP2TPoKosOLA3+AaAFFv38gOvOL
+O+MeIL1b+akoiJ7yTlAMRHu8nqsFou/d/qwNogFuaNLn
+  "]],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Clear", "[", 
+   RowBox[{"x", ",", "y", ",", "z"}], "]"}], ";", 
+  RowBox[{
+   RowBox[{"z", "[", "t_", "]"}], ":=", 
+   RowBox[{"Exp", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"-", "10"}], 
+      RowBox[{
+       RowBox[{"x", "[", "t", "]"}], "^", "2"}]}], "+", 
+     RowBox[{"5", 
+      RowBox[{
+       RowBox[{"y", "[", "t", "]"}], "^", "2"}]}]}], 
+    "]"}]}]}], "\[IndentingNewLine]", 
+ RowBox[{"D", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"x", "[", "t", "]"}], ",", 
+     RowBox[{"y", "[", "t", "]"}], ",", 
+     RowBox[{"z", "[", "t", "]"}]}], "}"}], ",", "t"}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"#", ".", "#"}], "&"}], "@", "%"}], "\[IndentingNewLine]", 
+ RowBox[{"ParametricNDSolve", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"%", "\[Equal]", "1"}], "&&", 
+    RowBox[{
+     RowBox[{"x", "[", "0", "]"}], "\[Equal]", 
+     RowBox[{"-", "\[Pi]"}]}], "&&", 
+    RowBox[{
+     RowBox[{"y", "[", "0", "]"}], "\[Equal]", 
+     RowBox[{"-", "\[Pi]"}]}]}], ",", 
+   RowBox[{"{", 
+    RowBox[{"t", ",", 
+     RowBox[{"-", "\[Pi]"}], ",", "\[Pi]"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"x", ",", "y"}], "}"}]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.807764883281461*^9, 3.807765019168807*^9}, {
+   3.807765063901915*^9, 3.8077650652772903`*^9}, {3.807765246154146*^9, 
+   3.807765248161829*^9}, 3.8077652913951406`*^9}],
+
+Cell[CellGroupData[{
+
+Cell["Adding a velocity vector to the point", "Section",
+ CellChangeTimes->{{3.807580599268015*^9, 3.8075806051626453`*^9}}],
+
+Cell["\<\
+We want to add small arrow starting from the traveling point in the direction \
+of motion.   The problem with the gaussian example is that we move for a \
+step-size of zero along the linearized function.\
+\>", "Text",
+ CellChangeTimes->{{3.8075806485005074`*^9, 3.807580729082196*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"For", " ", "example"}], "*)"}], 
+  RowBox[{
+   RowBox[{"Normal", "@", 
+    RowBox[{"Series", "[", 
+     RowBox[{
+      RowBox[{"g", "[", "x", "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"x", ",", "x0", ",", "1"}], "}"}]}], "]"}]}], "\[NotEqual]", 
+   RowBox[{"g", "[", "x0", "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.807580730137893*^9, 3.807580772706803*^9}}],
+
+Cell["Below is some investigations.", "Text",
+ CellChangeTimes->{{3.807580784499755*^9, 3.807580792708558*^9}}],
+
+Cell[BoxData[{
+ RowBox[{"Normal", "@", 
+  RowBox[{"Series", "[", 
+   RowBox[{
+    RowBox[{"f", "[", "x", "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"x", ",", "t", ",", "1"}], "}"}]}], 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"%", "/.", 
+  RowBox[{"x", "\[Rule]", "0"}]}]}], "Input",
+ CellChangeTimes->{{3.807577958676137*^9, 3.80757796090939*^9}, 
+   3.807578164249051*^9, 3.807578738183256*^9, {3.8075788714832745`*^9, 
+   3.807578893629318*^9}, {3.8075789459919786`*^9, 3.807578958806856*^9}, {
+   3.807579038135549*^9, 3.80757908703551*^9}, {3.8075791370903254`*^9, 
+   3.8075791471496267`*^9}, {3.8075793054257092`*^9, 
+   3.8075793259521585`*^9}, {3.807579382807294*^9, 3.807579388928901*^9}, 
+   3.807579450860509*^9, {3.807580393054716*^9, 3.8075804194169893`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Normal", "@", 
+  RowBox[{"Series", "[", 
+   RowBox[{
+    RowBox[{"g", "[", "x", "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"x", ",", "x0", ",", "1"}], "}"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.807580472562831*^9, 3.8075804889298706`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"With", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"t", "=", "1"}], "}"}], ",", 
+   RowBox[{"Plot", "[", 
+    RowBox[{
+     RowBox[{"Evaluate", "@", 
+      RowBox[{"Normal", "@", 
+       RowBox[{"Series", "[", 
+        RowBox[{
+         RowBox[{"f", "[", "x", "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"x", ",", "t", ",", "1"}], "}"}]}], "]"}]}]}], ",", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", 
+       RowBox[{"-", "1"}], ",", "1"}], "}"}]}], "]"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.8075794741303716`*^9, 3.8075795226551456`*^9}}]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{960, 1007},
+WindowMargins->{{-8, Automatic}, {Automatic, -8}},
+Magnification:>1.2 Inherited,
+FrontEndVersion->"10.1 for Microsoft Windows (64-bit) (March 23, 2015)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 129, 1, 173, "Title"],
+Cell[712, 25, 422, 14, 39, "Text"],
+Cell[1137, 41, 2739, 78, 313, "Input"],
+Cell[3879, 121, 1419, 44, 106, "Input"],
+Cell[CellGroupData[{
+Cell[5323, 169, 124, 1, 76, "Section"],
+Cell[5450, 172, 295, 5, 58, "Text"],
+Cell[5748, 179, 418, 12, 36, "Input"],
+Cell[6169, 193, 111, 1, 35, "Text"],
+Cell[6283, 196, 778, 16, 60, "Input"],
+Cell[7064, 214, 271, 7, 36, "Input"],
+Cell[7338, 223, 580, 17, 36, "Input"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

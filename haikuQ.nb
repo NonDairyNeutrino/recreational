@@ -1,0 +1,86 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      2277,         76]
+NotebookOptionsPosition[      1963,         61]
+NotebookOutlinePosition[      2306,         76]
+CellTagsIndexPosition[      2263,         73]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{"Clear", "@", "haikuQ"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"haikuQ", "[", "text_", "]"}], ":="}]}], "Input",
+ CellChangeTimes->{{3.807807394639909*^9, 3.8078074291181297`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{"StringSplit", "@", 
+  RowBox[{
+  "ToLowerCase", "@", "\"\<Hello World\>\""}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Length", "@", 
+    RowBox[{"WordData", "[", 
+     RowBox[{"#", ",", "\"\<Hyphenation\>\""}], "]"}]}], "&"}], "/@", 
+  "%"}]}], "Input",
+ CellChangeTimes->{{3.8078074456424103`*^9, 3.8078074885323725`*^9}, 
+   3.807807556137455*^9, {3.807807586163086*^9, 3.807807594259604*^9}, {
+   3.8078079292640543`*^9, 3.80780793754014*^9}, 3.8078079693024006`*^9}],
+
+Cell[BoxData[{
+ RowBox[{"StringSplit", "@", 
+  RowBox[{
+  "ToLowerCase", "@", 
+   "\"\<An old silent pond A frog jumps into the pond splash Silence \
+again\>\""}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Length", "@", 
+    RowBox[{"WordData", "[", 
+     RowBox[{"#", ",", "\"\<Hyphenation\>\""}], "]"}]}], "&"}], "/@", 
+  "%"}], "\[IndentingNewLine]", 
+ RowBox[{"If", "[", "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"Initial", " ", "check"}], "*)"}], 
+  RowBox[{
+   RowBox[{
+    RowBox[{"Total", "@", "%"}], "\[Equal]", "17"}], ",", 
+   "\[IndentingNewLine]"}]}]}], "Input",
+ CellChangeTimes->{{3.8078080229808884`*^9, 3.807808116171444*^9}}]
+},
+WindowSize->{1904, 1007},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"10.1 for Microsoft Windows (64-bit) (March 23, 2015)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 211, 4, 52, "Input"],
+Cell[772, 26, 514, 12, 52, "Input"],
+Cell[1289, 40, 670, 19, 112, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)
+
