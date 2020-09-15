@@ -58,8 +58,9 @@ labelPos[path:$argformpath]:=MapThread[RotationTransform[-\[Pi]/8,#1][#2]&,{path
 
 (*Path animation*)
 ClearAll@taylorPathAnim
-SyntaxInformation[taylorPathAnim] = {"ArgumentsPattern"->{{_,_,_,_.}}};
-taylorPathAnim[args:($argformterms|$argformerror)]:=ListAnimate@Block[
+SyntaxInformation[taylorPathAnim] = {"ArgumentsPattern"->{{_,_,_,_.},OptionsPattern[]}};
+Options[taylorPathAnim] = {"animated" -> True};
+taylorPathAnim[args:($argformterms|$argformerror),OptionsPattern[]]:=If[OptionValue["animated"],ListAnimate,Identity]@Block[
 	{path=taylorPath@args,labels=pathToTerms@path,labelplaces=labelPos@path},
 	Table[
 		Graphics[
@@ -67,10 +68,10 @@ taylorPathAnim[args:($argformterms|$argformerror)]:=ListAnimate@Block[
 				{Darker[Orange,1/5],Circle[]},
 				{Arrow@path[[;;n]]},
 				##&@@MapThread[Inset[Style[TraditionalForm@Chop@N@#1,12,Black],#2]&,{labels,labelplaces}[[;;,;;n]]],
-				{Red,Arrow@{{0,0},ReIm[args[[1]][args[[2]]]]}}
+				{Blue,Arrow@{{0,0},ReIm[args[[1]][args[[2]]]]}}
 			},
 			Axes->True,
-			PlotLabel->Style["MacLaurin path of "<>ToString[args[[1]],TraditionalForm]<>" at "<>ToString[args[[2]],TraditionalForm],15,Black],
+			PlotLabel->Style["Maclaurin path of "<>ToString[args[[1]],TraditionalForm]<>" at "<>ToString[args[[2]],TraditionalForm],15,Black],
 			PlotRange->Max@Abs@Accumulate@labels
 		],
 		{n,Length@path}
