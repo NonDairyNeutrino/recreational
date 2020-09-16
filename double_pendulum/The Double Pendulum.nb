@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     54763,       1536]
-NotebookOptionsPosition[     52876,       1473]
-NotebookOutlinePosition[     53221,       1488]
-CellTagsIndexPosition[     53178,       1485]
+NotebookDataLength[     54721,       1533]
+NotebookOptionsPosition[     52835,       1470]
+NotebookOutlinePosition[     53180,       1485]
+CellTagsIndexPosition[     53137,       1482]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -112,7 +112,7 @@ Cell[BoxData[{
    3.8084133136845665`*^9, 3.8084133154788055`*^9}, {3.8084168336774063`*^9, 
    3.8084168393952365`*^9}, {3.8084168849785714`*^9, 3.808416897463829*^9}, {
    3.8084169375916295`*^9, 3.808416938267415*^9}}]
-}, Closed]],
+}, Open  ]],
 
 Cell["The Single Pendulum", "Section",
  CellChangeTimes->{{3.808325678545809*^9, 3.8083256863852153`*^9}}],
@@ -123,19 +123,16 @@ Cell["The Double Pendulum", "Section",
  CellChangeTimes->{{3.80832568897633*^9, 3.80832569370028*^9}}],
 
 Cell[BoxData[
- RowBox[{
-  RowBox[{"(*", 
-   RowBox[{
-    RowBox[{"Don", "'"}], "t", " ", "click", " ", "the", " ", "picture"}], 
-   "*)"}], 
+ RowBox[{"Import", "[", 
   RowBox[{
-  "Import", "[", 
-   "\"\<https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Double-\
-Pendulum.svg/294px-Double-Pendulum.svg.png\>\"", "]"}]}]], "Input",
+  "\"\<https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Double-\
+Pendulum.svg/294px-Double-Pendulum.svg.png\>\"", ",", "\"\<Graphics\>\""}], 
+  "]"}]], "Input",
  CellChangeTimes->{{3.8083257400140505`*^9, 3.8083257793306623`*^9}, {
    3.8083258974418974`*^9, 3.8083258979819593`*^9}, {3.808326042934061*^9, 
    3.8083260516176767`*^9}, 3.808326302846601*^9, 3.8083301010508165`*^9, {
-   3.808330138765564*^9, 3.8083301499218197`*^9}}],
+   3.808330138765564*^9, 3.8083301499218197`*^9}, {3.809219213970868*^9, 
+   3.8092192286643295`*^9}}],
 
 Cell["\<\
 In this discussion we will be modelling the physics of the double pendulum \
@@ -510,7 +507,7 @@ Now that we have the total potential energy of the system, we can move on to \
 the kinetic energy.\
 \>", "Text",
  CellChangeTimes->{{3.8083604780599766`*^9, 3.8083605146792603`*^9}}]
-}, Closed]],
+}, Open  ]],
 
 Cell[CellGroupData[{
 
@@ -1011,7 +1008,7 @@ Now that we have the potential and kinetic energies at hand, let\
 \>", "Text",
  CellChangeTimes->{{3.8083716793221717`*^9, 3.808371723580542*^9}, {
   3.8083724678984137`*^9, 3.808372484021274*^9}}]
-}, Closed]],
+}, Open  ]],
 
 Cell[CellGroupData[{
 
@@ -1123,8 +1120,8 @@ Cell[BoxData[{
    3.808413645569067*^9, 3.808413678411154*^9}, {3.808413770249219*^9, 
    3.8084137984786305`*^9}, {3.8084154597710514`*^9, 3.808415492429906*^9}, {
    3.808415522547749*^9, 3.808415541542554*^9}, 3.8084262436980553`*^9}]
-}, Closed]]
-}, Closed]],
+}, Open  ]]
+}, Open  ]],
 
 Cell[CellGroupData[{
 
@@ -1467,7 +1464,7 @@ Cell[BoxData[{
    3.808432314042714*^9, {3.8084323556888094`*^9, 3.808432369089436*^9}, {
    3.808432410350349*^9, 3.808432427148919*^9}, {3.808432462499973*^9, 
    3.808432483854066*^9}}]
-}, Closed]]
+}, Open  ]]
 }, Open  ]]
 }, Open  ]]
 },
@@ -1494,48 +1491,48 @@ Cell[CellGroupData[{
 Cell[979, 34, 104, 1, 63, "Section"],
 Cell[1086, 37, 3057, 76, 104, "Input",
  InitializationCell->True]
-}, Closed]],
-Cell[4158, 116, 106, 1, 49, "Section"],
+}, Open  ]],
+Cell[4158, 116, 106, 1, 63, "Section"],
 Cell[CellGroupData[{
 Cell[4289, 121, 102, 1, 49, "Section"],
-Cell[4394, 124, 586, 13, 31, "Input"],
-Cell[4983, 139, 209, 4, 30, "Text"],
+Cell[4394, 124, 545, 10, 31, "Input"],
+Cell[4942, 136, 209, 4, 30, "Text"],
 Cell[CellGroupData[{
-Cell[5217, 147, 157, 2, 43, "Subsection"],
-Cell[5377, 151, 636, 16, 30, "Text"],
+Cell[5176, 144, 157, 2, 43, "Subsection"],
+Cell[5336, 148, 636, 16, 30, "Text"],
 Cell[CellGroupData[{
-Cell[6038, 171, 113, 1, 34, "Subsubsection"],
-Cell[6154, 174, 7708, 232, 381, "Text"],
-Cell[13865, 408, 1314, 37, 92, "Input"],
-Cell[15182, 447, 2612, 53, 112, "Input"],
-Cell[17797, 502, 157, 3, 31, "Input"],
-Cell[17957, 507, 192, 4, 30, "Text"]
-}, Closed]],
+Cell[5997, 168, 113, 1, 34, "Subsubsection"],
+Cell[6113, 171, 7708, 232, 381, "Text"],
+Cell[13824, 405, 1314, 37, 92, "Input"],
+Cell[15141, 444, 2612, 53, 112, "Input"],
+Cell[17756, 499, 157, 3, 31, "Input"],
+Cell[17916, 504, 192, 4, 30, "Text"]
+}, Open  ]],
 Cell[CellGroupData[{
-Cell[18186, 516, 109, 1, 34, "Subsubsection"],
-Cell[18298, 519, 11555, 380, 563, "Text"],
-Cell[29856, 901, 2398, 56, 152, "Input"],
-Cell[32257, 959, 1794, 39, 117, "Input"],
-Cell[34054, 1000, 188, 5, 31, "Input"],
-Cell[34245, 1007, 287, 5, 30, "Text"]
-}, Closed]],
+Cell[18145, 513, 109, 1, 34, "Subsubsection"],
+Cell[18257, 516, 11555, 380, 563, "Text"],
+Cell[29815, 898, 2398, 56, 152, "Input"],
+Cell[32216, 956, 1794, 39, 117, "Input"],
+Cell[34013, 997, 188, 5, 31, "Input"],
+Cell[34204, 1004, 287, 5, 30, "Text"]
+}, Open  ]],
 Cell[CellGroupData[{
-Cell[34569, 1017, 130, 1, 34, "Subsubsection"],
-Cell[34702, 1020, 127, 1, 30, "Text"],
-Cell[34832, 1023, 1071, 21, 92, "Input"],
-Cell[35906, 1046, 276, 5, 30, "Text"],
-Cell[36185, 1053, 2923, 71, 112, "Input"]
-}, Closed]]
-}, Closed]],
+Cell[34528, 1014, 130, 1, 34, "Subsubsection"],
+Cell[34661, 1017, 127, 1, 30, "Text"],
+Cell[34791, 1020, 1071, 21, 92, "Input"],
+Cell[35865, 1043, 276, 5, 30, "Text"],
+Cell[36144, 1050, 2923, 71, 112, "Input"]
+}, Open  ]]
+}, Open  ]],
 Cell[CellGroupData[{
-Cell[39157, 1130, 113, 1, 35, "Subsection"],
-Cell[39273, 1133, 102, 1, 30, "Text"],
-Cell[39378, 1136, 121, 1, 30, "Text"],
-Cell[39502, 1139, 2601, 70, 132, "Input"],
-Cell[42106, 1211, 108, 1, 30, "Text"],
-Cell[42217, 1214, 1812, 40, 72, "Input"],
-Cell[44032, 1256, 8804, 212, 392, "Input"]
-}, Closed]]
+Cell[39116, 1127, 113, 1, 43, "Subsection"],
+Cell[39232, 1130, 102, 1, 30, "Text"],
+Cell[39337, 1133, 121, 1, 30, "Text"],
+Cell[39461, 1136, 2601, 70, 132, "Input"],
+Cell[42065, 1208, 108, 1, 30, "Text"],
+Cell[42176, 1211, 1812, 40, 72, "Input"],
+Cell[43991, 1253, 8804, 212, 392, "Input"]
+}, Open  ]]
 }, Open  ]]
 }, Open  ]]
 }
