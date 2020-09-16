@@ -1,0 +1,311 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     11473,        302]
+NotebookOptionsPosition[     10739,        272]
+NotebookOutlinePosition[     11084,        287]
+CellTagsIndexPosition[     11041,        284]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Random Futurama Episode Selector", "Title",
+ CellChangeTimes->{{3.738373747591728*^9, 3.738373757816391*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Version 1", "Section",
+ CellChangeTimes->{{3.73837376276516*^9, 3.7383737644965305`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{"Clear", "[", 
+  RowBox[{"Futurama", ",", "epnames"}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"epnames", "[", "S_", "]"}], ":=", 
+  RowBox[{
+   RowBox[{"epnames", "[", "S", "]"}], "=", 
+   RowBox[{
+    RowBox[{"WolframAlpha", "[", 
+     RowBox[{
+      RowBox[{"\"\<Futurama season\>\"", "<>", 
+       RowBox[{"ToString", "@", "S"}]}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"\"\<SeasonEpisodes:TelevisionProgramData\>\"", ",", "1"}], 
+         "}"}], ",", "\"\<ComputableData\>\""}], "}"}], ",", 
+      RowBox[{"PodStates", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{
+        "\"\<SeasonEpisodes:TelevisionProgramData__More\>\"", ",", 
+         "\"\<SeasonEpisodes:TelevisionProgramData__More\>\""}], "}"}]}]}], 
+     "]"}], "\[LeftDoubleBracket]", 
+    RowBox[{
+     RowBox[{"2", ";;"}], ",", "1"}], 
+    "\[RightDoubleBracket]"}]}]}], "\[IndentingNewLine]", 
+ RowBox[{"Futurama", ":=", 
+  RowBox[{"Block", "[", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{"This", " ", "uses", " ", 
+      ButtonBox["this",
+       BaseStyle->"Hyperlink",
+       ButtonData->{
+         URL["http://epguides.com/Futurama/"], None},
+       ButtonNote->"http://epguides.com/Futurama/"], " ", "sequencing", " ", 
+      RowBox[{"http", ":"}]}], "//", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"epguides", ".", "com"}], "/", "Futurama"}], "/"}]}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"S", "=", 
+       RowBox[{"RandomInteger", "[", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "7"}], "}"}], "]"}]}], ",", "ep"}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"ep", "=", 
+      RowBox[{"RandomInteger", "[", 
+       RowBox[{"{", 
+        RowBox[{"1", ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+           "9", ",", "20", ",", "15", ",", "12", ",", "16", ",", "26", ",", 
+            "26"}], "}"}], "\[LeftDoubleBracket]", "S", 
+          "\[RightDoubleBracket]"}]}], "}"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"\"\<Season: \>\"", "<>", 
+      RowBox[{"ToString", "@", "S"}], "<>", "\"\<, Episode: \>\"", "<>", 
+      RowBox[{"ToString", "@", "ep"}], "<>", "\"\<, Name: \>\"", "<>", 
+      RowBox[{
+       RowBox[{"epnames", "[", "S", "]"}], "\[LeftDoubleBracket]", "ep", 
+       "\[RightDoubleBracket]"}]}]}]}], "\[IndentingNewLine]", "]"}]}], "\n", 
+ RowBox[{"CreateDialog", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Button", "[", 
+    RowBox[{"\"\<Give me a random Futurama episode to watch\>\"", ",", 
+     RowBox[{"Print", "@", "Futurama"}], ",", 
+     RowBox[{"Alignment", "\[Rule]", "Center"}]}], "]"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+   "WindowTitle", "\[Rule]", 
+    "\"\<Which episode of Futurama you should watch\>\""}]}], 
+  "\[IndentingNewLine]", "]"}]}], "Input",
+ CellChangeTimes->{{3.7381933804365435`*^9, 3.738193550263488*^9}, {
+   3.7381935995427327`*^9, 3.7381937257453136`*^9}, {3.7381937594302516`*^9, 
+   3.738193984541387*^9}, {3.7381940326577415`*^9, 3.7381941455329533`*^9}, {
+   3.7381941822487893`*^9, 3.738194224210599*^9}, {3.7381942632402477`*^9, 
+   3.7381942977669353`*^9}, {3.7381943954417887`*^9, 3.738194397179143*^9}, {
+   3.7381944484959407`*^9, 3.7381944487921495`*^9}, 3.7381949269018574`*^9, {
+   3.7381967932509294`*^9, 3.7381969224139705`*^9}, {3.7381973556771803`*^9, 
+   3.738197373984991*^9}, 3.7381974558792143`*^9, {3.738197517497031*^9, 
+   3.7381975864709616`*^9}, {3.7381976211423907`*^9, 3.738197663464687*^9}, 
+   3.738197693883683*^9, {3.7381977613858056`*^9, 3.7381978128424854`*^9}, 
+   3.7381994440763254`*^9, {3.738199518860794*^9, 3.738199522406784*^9}, {
+   3.7381998067591023`*^9, 3.7381998463801455`*^9}, {3.738199991390201*^9, 
+   3.7382000168742666`*^9}, 3.7382001073433084`*^9, {3.738200329423999*^9, 
+   3.7382003346543846`*^9}, {3.7382003657507257`*^9, 3.738200453583377*^9}, {
+   3.73820061398552*^9, 3.738200620239798*^9}, {3.73820100023483*^9, 
+   3.7382010164006085`*^9}, {3.738201155755601*^9, 3.7382012399594707`*^9}, {
+   3.7382013771387033`*^9, 3.7382014040138493`*^9}, {3.738201439610359*^9, 
+   3.7382014765216713`*^9}, {3.738201535383297*^9, 3.738201566770379*^9}, {
+   3.738201604176922*^9, 3.738201636439663*^9}, {3.7382017614255915`*^9, 
+   3.738201806483382*^9}, {3.738201843038493*^9, 3.7382018654738073`*^9}, {
+   3.7382022573097286`*^9, 3.738202260884172*^9}, 3.7382023514351206`*^9, {
+   3.738202391721409*^9, 3.7382023980215645`*^9}, {3.73820243439332*^9, 
+   3.7382024392483397`*^9}, {3.738202700796236*^9, 3.738202720698036*^9}, 
+   3.7382041342527437`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Version 2", "Section",
+ CellChangeTimes->{{3.738373769679673*^9, 3.738373772595876*^9}}],
+
+Cell[BoxData[{
+ RowBox[{"Clear", "@", "fulleps"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"fulleps", "=", 
+   RowBox[{"Cases", "[", 
+    RowBox[{
+     RowBox[{"Import", "[", 
+      RowBox[{
+      "\"\<https://en.wikipedia.org/wiki/List_of_Futurama_episodes\>\"", ",", 
+       "\"\<Data\>\""}], "]"}], ",", 
+     RowBox[{"Alternatives", "@@", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{"{", "_Integer", "}"}], "~", "Join", "~", 
+          RowBox[{"ConstantArray", "[", 
+           RowBox[{"_", ",", "#"}], "]"}]}], "&"}], "/@", 
+        RowBox[{"{", 
+         RowBox[{"7", ",", "8"}], "}"}]}], ")"}]}], ",", "\[Infinity]"}], 
+    "]"}]}], ";"}]}], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.7383689608686185`*^9, 3.738368997748737*^9}, {
+   3.7383690633613234`*^9, 3.73836910221589*^9}, {3.7383691850714707`*^9, 
+   3.7383691878306236`*^9}, 3.738369267788464*^9, {3.7383701696927276`*^9, 
+   3.738370186663354*^9}, 3.738370450087055*^9, {3.7383706535101757`*^9, 
+   3.7383706709296026`*^9}, 3.7383719634259386`*^9, 3.7383723171611795`*^9, {
+   3.738372394178263*^9, 3.7383723994302216`*^9}, 3.738372959671341*^9, {
+   3.7383731189824004`*^9, 3.738373172192137*^9}, 3.738374018629073*^9}],
+
+Cell[BoxData[{
+ RowBox[{"Clear", "@", "eps"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"eps", "=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{"ToExpression", "[", 
+       RowBox[{"StringSplit", "[", 
+        RowBox[{
+         RowBox[{"#", "[", 
+          RowBox[{"[", 
+           RowBox[{"If", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"Length", "@", "#"}], "\[Equal]", "8"}], ",", 
+             RowBox[{"-", "2"}], ",", 
+             RowBox[{"-", "3"}]}], "]"}], "]"}], "]"}], ",", 
+         RowBox[{
+          RowBox[{"_", "?", "LetterQ"}], ".."}]}], "]"}], "]"}], "~", "Join", 
+      "~", 
+      RowBox[{"{", 
+       RowBox[{"StringTrim", "[", 
+        RowBox[{
+         RowBox[{"#", "[", 
+          RowBox[{"[", "3", "]"}], "]"}], ",", 
+         RowBox[{"(", 
+          RowBox[{"\"\<\\\" \>\"", "|", "\"\< \\\"\>\""}], ")"}]}], "]"}], 
+       "}"}]}], "&"}], "/@", "fulleps"}]}], ";"}]}], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.7383691121701145`*^9, 3.738369124920581*^9}, 
+   3.7383691940955687`*^9, {3.7383723252645135`*^9, 3.738372336693955*^9}, 
+   3.7383728491518297`*^9, 3.7383730277184076`*^9, {3.7383731937554846`*^9, 
+   3.738373195995496*^9}, {3.7383738014487343`*^9, 3.738373802604644*^9}, 
+   3.738373856247223*^9, {3.738374026479085*^9, 3.738374027302882*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Futurama", ":=", 
+  RowBox[{"StringForm", "[", 
+   RowBox[{"\"\<Season: `` Epsiode: `` Name: ``\>\"", ",", 
+    RowBox[{"Sequence", "@@", 
+     RowBox[{"RandomChoice", "[", "eps", "]"}]}]}], "]"}]}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.73837302924333*^9, 3.738373030985672*^9}, {
+   3.738373201347187*^9, 3.7383732015985155`*^9}, 3.7383739406425805`*^9}],
+
+Cell[BoxData[
+ RowBox[{"(*", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"dat", "\[LeftDoubleBracket]", 
+      RowBox[{"{", 
+       RowBox[{"1", ",", 
+        RowBox[{"-", "1"}]}], "}"}], "\[RightDoubleBracket]"}], 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"ToExpression", "[", 
+       RowBox[{"StringSplit", "[", 
+        RowBox[{
+         RowBox[{"#", "[", 
+          RowBox[{"[", 
+           RowBox[{"If", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"Length", "@", "#"}], "\[Equal]", "8"}], ",", 
+             RowBox[{"-", "2"}], ",", 
+             RowBox[{"-", "3"}]}], "]"}], "]"}], "]"}], ",", 
+         RowBox[{
+          RowBox[{"_", "?", "LetterQ"}], ".."}]}], "]"}], "]"}], "~", "Join", 
+      "~", 
+      RowBox[{"{", 
+       RowBox[{"StringTrim", "[", 
+        RowBox[{
+         RowBox[{"#", "[", 
+          RowBox[{"[", "3", "]"}], "]"}], ",", 
+         RowBox[{"(", 
+          RowBox[{"\"\<\\\" \>\"", "|", "\"\< \\\"\>\""}], ")"}]}], "]"}], 
+       "}"}]}]}], "&"}], "/@", "%"}], "*)"}]], "Input",
+ CellChangeTimes->{{3.738371626512721*^9, 3.738371734999666*^9}, {
+   3.7383718106843133`*^9, 3.7383718475736856`*^9}, {3.7383720075709105`*^9, 
+   3.7383720190103254`*^9}, {3.7383720544336166`*^9, 3.73837206076469*^9}, 
+   3.7383721277695427`*^9, {3.738372190731207*^9, 3.738372201707859*^9}, {
+   3.7383723682037096`*^9, 3.7383723687153416`*^9}, {3.7383725168891788`*^9, 
+   3.738372568274792*^9}, 3.7383739210260277`*^9}],
+
+Cell[BoxData[
+ RowBox[{"CreateDialog", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Button", "[", 
+    RowBox[{"\"\<Give me a random Futurama episode to watch\>\"", ",", 
+     RowBox[{"Print", "@", "Futurama"}], ",", 
+     RowBox[{"Alignment", "\[Rule]", "Center"}]}], "]"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+   "WindowTitle", "\[Rule]", 
+    "\"\<Which episode of Futurama you should watch\>\""}]}], 
+  "\[IndentingNewLine]", "]"}]], "Input",
+ CellChangeTimes->{{3.738374145460971*^9, 3.7383741785315523`*^9}, {
+  3.7383742692280626`*^9, 3.738374272402575*^9}}]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{958, 1028},
+WindowMargins->{{Automatic, -967}, {Automatic, 0}},
+FrontEndVersion->"10.1 for Microsoft Windows (64-bit) (March 23, 2015)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 115, 1, 90, "Title"],
+Cell[CellGroupData[{
+Cell[720, 27, 95, 1, 63, "Section"],
+Cell[818, 30, 4686, 101, 360, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5541, 136, 94, 1, 63, "Section"],
+Cell[5638, 139, 1253, 28, 72, "Input",
+ InitializationCell->True],
+Cell[6894, 169, 1340, 34, 92, "Input",
+ InitializationCell->True],
+Cell[8237, 205, 401, 8, 31, "Input",
+ InitializationCell->True],
+Cell[8641, 215, 1486, 38, 72, "Input"],
+Cell[10130, 255, 581, 13, 92, "Input"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
