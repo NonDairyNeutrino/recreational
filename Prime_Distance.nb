@@ -1,0 +1,390 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     12918,        381]
+NotebookOptionsPosition[     11632,        332]
+NotebookOutlinePosition[     11977,        347]
+CellTagsIndexPosition[     11934,        344]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["e in the primes", "Title",
+ CellChangeTimes->{{3.771783419080326*^9, 3.7717834232681265`*^9}}],
+
+Cell["\<\
+Conjecture: The average length of a grouping of primes such that the distance \
+between consecutives must keep growing, converges to e.\
+\>", "Text",
+ CellChangeTimes->{{3.7717834288511963`*^9, 3.7717834803375072`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["List of Primes", "Section",
+ CellChangeTimes->{{3.771781430653417*^9, 3.7717814320815983`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{"Clear", "@", "primes"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"primes", "=", 
+   RowBox[{"Array", "[", 
+    RowBox[{"Prime", ",", 
+     RowBox[{"(*", 
+      RowBox[{"PrimePi", "[", "1423", "]"}], "*)"}], "100"}], "]"}]}], 
+  ";"}]}], "Input",
+ CellChangeTimes->{{3.7717755153341675`*^9, 3.771775527712244*^9}, {
+  3.7717756461386433`*^9, 3.771775662267747*^9}, {3.771780899278308*^9, 
+  3.771780914670146*^9}, {3.771782275231098*^9, 3.771782279328732*^9}, {
+  3.771783391330537*^9, 3.7717833917583923`*^9}, {3.771783853097735*^9, 
+  3.7717838535734625`*^9}, {3.7717839232620964`*^9, 3.7717839236021867`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Their list of Primes", "Section",
+ CellChangeTimes->{{3.771781436309292*^9, 3.77178143914072*^9}}],
+
+Cell[BoxData[{
+ RowBox[{"Clear", "@", "page"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"page", "=", 
+   RowBox[{
+   "Import", "[", 
+    "\"\<https://www.reddit.com/r/math/comments/cbd0a7/found_e_in_the_primes_\
+maybe/\>\"", "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.771778043724179*^9, 3.771778074991028*^9}, {
+  3.771778114004733*^9, 3.771778243650857*^9}, {3.7717783691013026`*^9, 
+  3.77177840229099*^9}}],
+
+Cell[BoxData[{
+ RowBox[{"Clear", "@", "data"}], "\[IndentingNewLine]", 
+ RowBox[{"data", "=", 
+  RowBox[{"StringCases", "[", "\[IndentingNewLine]", 
+   RowBox[{"page", ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{
+     "\"\<Arrange the primes so that the distance between consecutives must \
+keep growing:\>\"", "~~", "data1__", "~~", 
+      "\"\<Total average value of each row: 163 / 60 = 2.71666... \[AHat]\
+\:2030\:02c6 e\>\"", "~~", "data2__", "~~", 
+      "\"\<Total average value of each row\>\""}], "\[RuleDelayed]", 
+     RowBox[{"Sequence", "@@", 
+      RowBox[{"ToExpression", "@", 
+       RowBox[{"Select", "[", 
+        RowBox[{
+         RowBox[{"StringSplit", "[", 
+          RowBox[{
+           RowBox[{"data1", "<>", "data2"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"\"\< \>\"", ".."}], "\[Rule]", "\"\<Whitespace\>\""}], 
+             ",", 
+             RowBox[{"\"\<\\n\>\"", "\[Rule]", "\"\<Newline\>\""}]}], "}"}]}],
+           "]"}], ",", 
+         RowBox[{"Composition", "[", 
+          RowBox[{"NumberQ", ",", "ToExpression"}], "]"}]}], "]"}]}]}]}]}], 
+   "\n", "]"}]}]}], "Input",
+ CellChangeTimes->CompressedData["
+1:eJxTTMoPSmViYGCQBGIQXalTXi8h9caxYVt8M4g+pubQAaIvXS6ZAaLv2yqv
+ANHXAy3Xgeg5ux9uAtECew12geh7aj/3g+ioP3tPg+jsoIOikkD6oy6nPIhW
+snmpDKLfpM/XBtFMnf4mIHrJxc/eIDrrfE8siH5gwZMGonccPJoDomO0UwtB
+dHEFawWITmjXbgTRXB9W9oHozZ9OgmmbFf8ngWgZwX3TQPSKfdmzQTSHYT6Y
+TouasgREN/BuWA+iX5mXbAfRW1bk7gTRusqzD4H1Hy49AqKduqSugWi2lOO3
+QfSlm3fug937YMojEB2xfuYLEC0/5zWYPiKx6j2I/tCi+gdEH/DjZ5QC0lPC
+DoDpD06fuUH0/vUmPCD6j2KWGIjW+1AmC6IbBFYqg2gdjl9gGgDNMavQ
+  "]],
+
+Cell[BoxData[
+ RowBox[{"Extract", "[", 
+  RowBox[{"data", ",", 
+   RowBox[{"Position", "[", 
+    RowBox[{
+     RowBox[{"PrimeQ", "/@", "data"}], ",", "False"}], "]"}]}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.7717817903874846`*^9, 3.77178183284893*^9}}]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Verification", "Section",
+ CellChangeTimes->{{3.771781463572383*^9, 3.7717814670042048`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{"Transpose", "@", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"primes", "\[LeftDoubleBracket]", 
+     RowBox[{";;", 
+      RowBox[{"-", "4"}]}], "\[RightDoubleBracket]"}], ",", "data"}], 
+   "}"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Select", "[", 
+  RowBox[{"%", ",", 
+   RowBox[{
+    RowBox[{"Unequal", "@@", "#"}], "&"}]}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"PrimeQ", "@", "%"}]}], "Input",
+ CellChangeTimes->{{3.7717813715365133`*^9, 3.7717813774177847`*^9}, {
+  3.7717816074516096`*^9, 3.771781626774935*^9}, {3.771781660332288*^9, 
+  3.7717817342575912`*^9}, {3.771782097665593*^9, 3.7717821637421756`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"FactorInteger", "@", "189"}]], "Input",
+ CellChangeTimes->{{3.7717817550799055`*^9, 3.7717817602241488`*^9}}]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Grouping Primes", "Section",
+ CellChangeTimes->{{3.7717814470535583`*^9, 3.7717814554042263`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Mine", "Subsection",
+ CellChangeTimes->{{3.7717833990897865`*^9, 3.7717833994089327`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{"Clear", "@", "groups"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"groups", "=", 
+   RowBox[{
+    RowBox[{"Block", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"dist", "=", "0"}], ",", "val"}], "}"}], ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{"Split", "[", 
+       RowBox[{"primes", ",", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"val", "=", 
+            RowBox[{
+             RowBox[{"#2", "-", "#1"}], ">", "dist"}]}], ";", 
+           RowBox[{"dist", "=", 
+            RowBox[{"#2", "-", "#1"}]}], ";", "val"}], ")"}], "&"}]}], 
+       "]"}]}], "\[IndentingNewLine]", "]"}], "//.", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"begin___", ",", 
+       RowBox[{"{", "a_", "}"}], ",", 
+       RowBox[{"{", "b__", "}"}], ",", "end___"}], "}"}], "\[RuleDelayed]", 
+     RowBox[{"{", 
+      RowBox[{"begin", ",", 
+       RowBox[{"{", 
+        RowBox[{"a", ",", "b"}], "}"}], ",", "end"}], "}"}]}]}]}], 
+  ";"}]}], "Input",
+ CellChangeTimes->{{3.771775674498227*^9, 3.7717756794869356`*^9}, {
+   3.7717757854017196`*^9, 3.771775785557304*^9}, {3.771776243997876*^9, 
+   3.771776244481583*^9}, {3.7717765617784257`*^9, 3.771776567927577*^9}, {
+   3.7717766004056425`*^9, 3.7717766182407103`*^9}, {3.7717767882568283`*^9, 
+   3.771776921802953*^9}, {3.771776981756444*^9, 3.7717769848836203`*^9}, {
+   3.7717770298265705`*^9, 3.771777034463252*^9}, {3.77177709074408*^9, 
+   3.77177715552232*^9}, {3.77177721187894*^9, 3.771777245060161*^9}, {
+   3.7717773148140717`*^9, 3.77177734569093*^9}, {3.771777470559084*^9, 
+   3.771777472810087*^9}, {3.7717776809169407`*^9, 3.771777744453413*^9}, {
+   3.771777945692535*^9, 3.771777948668106*^9}, {3.771781139313387*^9, 
+   3.7717811397482243`*^9}, {3.771782416790597*^9, 3.7717824237066746`*^9}, {
+   3.7717826027069798`*^9, 3.771782701006485*^9}, {3.7717827318928423`*^9, 
+   3.7717827803374662`*^9}, {3.7717828426490984`*^9, 3.771782844447302*^9}, 
+   3.7717830299476256`*^9}],
+
+Cell[BoxData[
+ RowBox[{"Short", "@", "groups"}]], "Input",
+ CellChangeTimes->{{3.771783562725272*^9, 3.771783565718268*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"Length", "/@", "groups"}], "//", "Mean"}], "//", "N"}]], "Input",
+ CellChangeTimes->{{3.7717829300484905`*^9, 3.7717829358201294`*^9}, {
+  3.7717831564370775`*^9, 3.771783191442963*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Theirs", "Subsection",
+ CellChangeTimes->{{3.7717834021416245`*^9, 3.7717834026881633`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Block", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"dist", "=", "0"}], ",", "val"}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"Split", "[", 
+     RowBox[{"data", 
+      RowBox[{"(*", 
+       RowBox[{"DeleteCases", "[", 
+        RowBox[{"data", ",", "189"}], "]"}], "*)"}], ",", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"val", "=", 
+          RowBox[{
+           RowBox[{"#2", "-", "#1"}], ">", "dist"}]}], ";", 
+         RowBox[{"dist", "=", 
+          RowBox[{"#2", "-", "#1"}]}], ";", "val"}], ")"}], "&"}]}], "]"}]}], 
+   "\[IndentingNewLine]", "]"}], "//.", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"begin___", ",", 
+     RowBox[{"{", "a_", "}"}], ",", 
+     RowBox[{"{", "b__", "}"}], ",", "end___"}], "}"}], "\[RuleDelayed]", 
+   RowBox[{"{", 
+    RowBox[{"begin", ",", 
+     RowBox[{"{", 
+      RowBox[{"a", ",", "b"}], "}"}], ",", "end"}], "}"}]}]}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Length", "/@", "%"}], "//", "Mean"}], "//", "N"}]}], "Input",
+ CellChangeTimes->{{3.7717819045860853`*^9, 3.771781910265895*^9}, 
+   3.7717829599708476`*^9, {3.771783214378755*^9, 3.7717832173986793`*^9}, {
+   3.771783277439114*^9, 3.7717832788244095`*^9}}]
+}, Closed]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Function", "Section",
+ CellChangeTimes->{{3.771783969470522*^9, 3.7717839712228355`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{"Clear", "@", "conjecture"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"conjecture", "[", "numberofprimes_Integer", "]"}], ":=", 
+  RowBox[{"Block", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"primes", ",", "groups"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"primes", "=", 
+      RowBox[{"Array", "[", 
+       RowBox[{"Prime", ",", 
+        RowBox[{"(*", 
+         RowBox[{"PrimePi", "[", "1423", "]"}], "*)"}], "numberofprimes"}], 
+       "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"groups", "=", 
+      RowBox[{
+       RowBox[{"Block", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"dist", "=", "0"}], ",", "val"}], "}"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"Split", "[", 
+          RowBox[{"primes", ",", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"val", "=", 
+               RowBox[{
+                RowBox[{"#2", "-", "#1"}], ">", "dist"}]}], ";", 
+              RowBox[{"dist", "=", 
+               RowBox[{"#2", "-", "#1"}]}], ";", "val"}], ")"}], "&"}]}], 
+          "]"}]}], "\[IndentingNewLine]", "]"}], "//.", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"begin___", ",", 
+          RowBox[{"{", "a_", "}"}], ",", 
+          RowBox[{"{", "b__", "}"}], ",", "end___"}], "}"}], "\[RuleDelayed]", 
+        RowBox[{"{", 
+         RowBox[{"begin", ",", 
+          RowBox[{"{", 
+           RowBox[{"a", ",", "b"}], "}"}], ",", "end"}], "}"}]}]}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"Length", "/@", "groups"}], "//", "Mean"}], "//", "N"}]}]}], 
+   "\[IndentingNewLine]", "]"}]}]}], "Input",
+ CellChangeTimes->{{3.771783984162232*^9, 3.7717840704694223`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{"ParallelArray", "[", 
+  RowBox[{"conjecture", ",", "5000", ",", "1", ",", "100"}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{"Show", "[", 
+  RowBox[{
+   RowBox[{"ListPlot", "@", "%"}], ",", 
+   RowBox[{"Plot", "[", 
+    RowBox[{"E", ",", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", "1", ",", 
+       RowBox[{"Length", "@", "%"}]}], "}"}]}], "]"}]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.771784073407565*^9, 3.7717842234533005`*^9}, {
+  3.7717842643549185`*^9, 3.771784264675063*^9}, {3.771784463326369*^9, 
+  3.7717844672977486`*^9}}]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1920, 1007},
+WindowMargins->{{-8, Automatic}, {Automatic, -8}},
+FrontEndVersion->"10.1 for Microsoft Windows (64-bit) (March 23, 2015)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 100, 1, 90, "Title"],
+Cell[683, 25, 229, 4, 30, "Text"],
+Cell[CellGroupData[{
+Cell[937, 33, 101, 1, 63, "Section"],
+Cell[1041, 36, 640, 13, 52, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1718, 54, 104, 1, 63, "Section"],
+Cell[1825, 57, 420, 10, 52, "Input"],
+Cell[2248, 69, 1638, 37, 132, "Input"],
+Cell[3889, 108, 256, 7, 31, "Input"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[4182, 120, 99, 1, 49, "Section"],
+Cell[4284, 123, 640, 15, 72, "Input"],
+Cell[4927, 140, 133, 2, 31, "Input"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[5097, 147, 104, 1, 49, "Section"],
+Cell[CellGroupData[{
+Cell[5226, 152, 96, 1, 43, "Subsection"],
+Cell[5325, 155, 2020, 45, 92, "Input"],
+Cell[7348, 202, 124, 2, 31, "Input"],
+Cell[7475, 206, 233, 5, 31, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7745, 216, 98, 1, 43, "Subsection"],
+Cell[7846, 219, 1255, 36, 92, "Input"]
+}, Closed]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[9150, 261, 95, 1, 63, "Section"],
+Cell[9248, 264, 1790, 48, 172, "Input"],
+Cell[11041, 314, 563, 14, 52, "Input"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

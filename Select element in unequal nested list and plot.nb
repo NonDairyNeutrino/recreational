@@ -1,0 +1,129 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      3883,        120]
+NotebookOptionsPosition[      3562,        105]
+NotebookOutlinePosition[      3909,        120]
+CellTagsIndexPosition[      3866,        117]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"(*", 
+  RowBox[{"From", " ", 
+   ButtonBox["here",
+    BaseStyle->"Hyperlink",
+    ButtonData->{
+      URL[
+      "https://mathematica.stackexchange.com/questions/182547/select-element-\
+in-unequal-nested-list-and-plot"], None},
+    ButtonNote->
+     "https://mathematica.stackexchange.com/questions/182547/select-element-\
+in-unequal-nested-list-and-plot"]}], "*)"}]], "Input",
+ CellChangeTimes->{{3.7468827494910297`*^9, 3.746882764405141*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"vdata", "=", 
+    RowBox[{"{", 
+     RowBox[{
+     "0.", ",", "0.2", ",", "0.4", ",", "0.6", ",", "0.8", ",", "1."}], 
+     "}"}]}], ";"}], "\n"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"sol", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "96.29"}], ",", 
+       RowBox[{"-", "0.07"}], ",", 
+       RowBox[{"-", "0.00"}], ",", "0.95"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "32.29"}], ",", 
+       RowBox[{"-", "0.06"}], ",", 
+       RowBox[{"-", "0.00"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "32.29"}], ",", 
+       RowBox[{"-", "0.03"}], ",", 
+       RowBox[{"-", "0.03"}], ",", "0.95"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "32.29"}], ",", "0.95"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "32.29"}], ",", "42.80"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "32.29"}], ",", "0.95"}], "}"}]}], "}"}]}], 
+  ";"}]}], "Input",
+ CellChangeTimes->{{3.7468798029743547`*^9, 3.746879802983331*^9}}],
+
+Cell[BoxData[{
+ RowBox[{"Thread", "/@", 
+  RowBox[{"DeleteCases", "[", 
+   RowBox[{
+    RowBox[{"DeleteCases", "[", 
+     RowBox[{
+      RowBox[{"MapThread", "[", 
+       RowBox[{"List", ",", 
+        RowBox[{"{", 
+         RowBox[{"vdata", ",", "sol"}], "}"}]}], "]"}], ",", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"x_", "?", "NumericQ"}], "/;", 
+        RowBox[{"0", "<=", "x", "<=", "1"}]}], "//", "Except"}], ",", 
+      RowBox[{"{", "3", "}"}]}], "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"_", ",", 
+      RowBox[{"{", "}"}]}], "}"}]}], "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"ListPlot", "[", 
+  RowBox[{"%", ",", 
+   RowBox[{"PlotStyle", "->", 
+    RowBox[{"PointSize", "[", ".02", "]"}]}]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.746879816771637*^9, 3.746879837398329*^9}, {
+  3.746880142044659*^9, 3.74688018454154*^9}, {3.746880330832469*^9, 
+  3.7468803552031236`*^9}, {3.746880459218545*^9, 3.746880492861597*^9}, {
+  3.746880627242814*^9, 3.7468806281224732`*^9}, {3.746880681474058*^9, 
+  3.746880683429387*^9}, {3.7468807998841596`*^9, 3.7468808332778206`*^9}, {
+  3.7468811573795333`*^9, 3.746881173286208*^9}, {3.746881323841829*^9, 
+  3.746881337770293*^9}, {3.746881389048462*^9, 3.7468813926204414`*^9}, {
+  3.7468818780029125`*^9, 3.746881895009427*^9}, {3.746881929619858*^9, 
+  3.746881936039687*^9}, {3.746882119551866*^9, 3.7468821918883944`*^9}}]
+},
+WindowSize->{1920, 1037},
+WindowMargins->{{1912, Automatic}, {Automatic, -8}},
+FrontEndVersion->"10.1 for Microsoft Windows (64-bit) (March 23, 2015)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 470, 12, 31, "Input"],
+Cell[1031, 34, 1138, 37, 72, "Input"],
+Cell[2172, 73, 1386, 30, 52, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)
