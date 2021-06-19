@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     16287,        422]
-NotebookOptionsPosition[     15601,        394]
-NotebookOutlinePosition[     15976,        410]
-CellTagsIndexPosition[     15933,        407]
+NotebookDataLength[     16511,        427]
+NotebookOptionsPosition[     15825,        399]
+NotebookOutlinePosition[     16200,        415]
+CellTagsIndexPosition[     16157,        412]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -295,83 +295,86 @@ Cell[BoxData[
 
 Cell[BoxData[{
  RowBox[{
-  RowBox[{
-   RowBox[{"With", "[", "\[IndentingNewLine]", 
-    RowBox[{
-     RowBox[{"{", 
-      RowBox[{
-       RowBox[{"\[Omega]circ", "=", "1"}], ",", 
-       RowBox[{"\[Omega]sqr", "=", 
-        RowBox[{"-", "1"}]}]}], "}"}], ",", "\[IndentingNewLine]", 
-     RowBox[{"Table", "[", "\[IndentingNewLine]", 
-      RowBox[{
-       RowBox[{"Graphics", "[", "\[IndentingNewLine]", 
-        RowBox[{
-         RowBox[{"{", "\[IndentingNewLine]", 
-          RowBox[{
-           RowBox[{"PointSize", "[", "0.025", "]"}], ",", 
-           "\[IndentingNewLine]", 
-           RowBox[{"Thickness", "[", ".007", "]"}], ",", 
-           "\[IndentingNewLine]", 
-           RowBox[{"(*", "Square", "*)"}], " ", 
-           RowBox[{"{", 
-            RowBox[{"Yellow", ",", 
-             RowBox[{"Point", "@", 
-              RowBox[{"rotsqr", "[", 
+  RowBox[{"With", "[", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"\[Omega]circ", "=", "1"}], ",", 
+      RowBox[{"\[Omega]sqr", "=", 
+       RowBox[{"-", "1"}]}]}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{"Table", "[", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"Graphics", "[", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"{", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"PointSize", "[", "0.025", "]"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"Thickness", "[", ".007", "]"}], ",", "\[IndentingNewLine]", 
+          RowBox[{"(*", "Circle", "*)"}], " ", 
+          RowBox[{"{", 
+           RowBox[{"Orange", ",", 
+            RowBox[{"Point", "[", "circpts", "]"}]}], "}"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"(*", "Square", "*)"}], " ", 
+          RowBox[{"{", 
+           RowBox[{"Yellow", ",", 
+            RowBox[{"Point", "@", 
+             RowBox[{"rotsqr", "[", 
+              RowBox[{
+               RowBox[{"-", "\[Omega]sqr"}], " ", "t"}], "]"}]}]}], "}"}], 
+          ",", "\[IndentingNewLine]", 
+          RowBox[{"(*", "Lines", "*)"}], " ", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"Thickness", "[", ".007", "]"}], ",", 
+            RowBox[{"RGBColor", "[", 
+             RowBox[{"0", ",", ".5", ",", ".5"}], "]"}], ",", 
+            RowBox[{"Line", "@", 
+             RowBox[{"Transpose", "[", 
+              RowBox[{
                RowBox[{
-                RowBox[{"-", "\[Omega]sqr"}], " ", "t"}], "]"}]}]}], "}"}], 
-           ",", "\[IndentingNewLine]", 
-           RowBox[{"(*", "Lines", "*)"}], " ", 
-           RowBox[{"{", 
-            RowBox[{
-             RowBox[{"Thickness", "[", ".007", "]"}], ",", 
-             RowBox[{"RGBColor", "[", 
-              RowBox[{"0", ",", ".5", ",", ".5"}], "]"}], ",", 
-             RowBox[{"Line", "@", 
-              RowBox[{"Transpose", "[", 
-               RowBox[{
-                RowBox[{
-                 RowBox[{"{", 
-                  RowBox[{"circpts", ",", 
-                   RowBox[{"Join", "@@@", 
-                    RowBox[{"Nearest", "[", 
+                RowBox[{"{", 
+                 RowBox[{"circpts", ",", 
+                  RowBox[{"Join", "@@@", 
+                   RowBox[{"Nearest", "[", 
                     RowBox[{
                     RowBox[{"rotsqr", "[", 
                     RowBox[{
                     RowBox[{"-", "\[Omega]sqr"}], " ", "t"}], "]"}], ",", 
                     "#"}], "]"}]}]}], "}"}], "&"}], "[", 
+               RowBox[{
                 RowBox[{
                  RowBox[{
-                  RowBox[{
-                   RowBox[{"RotationMatrix", "[", 
-                    RowBox[{"\[Omega]circ", " ", "t"}], "]"}], ".", "#"}], 
-                  "&"}], "/@", "circpts"}], "]"}], "]"}]}]}], "}"}]}], 
-          "\[IndentingNewLine]", "}"}], ",", "\[IndentingNewLine]", 
-         RowBox[{"Background", "\[Rule]", 
-          RowBox[{"Darker", "[", 
-           RowBox[{
-            RowBox[{"RGBColor", "[", 
-             RowBox[{"0", ",", ".25", ",", ".35"}], "]"}], ",", 
-            RowBox[{"3", "/", "5"}]}], "]"}]}], ",", "\[IndentingNewLine]", 
-         RowBox[{"PlotRangePadding", "\[Rule]", "0.1"}]}], 
-        "\[IndentingNewLine]", "]"}], ",", "\[IndentingNewLine]", 
-       RowBox[{"{", 
-        RowBox[{"t", ",", "0.", ",", 
-         RowBox[{"2", "\[Pi]"}], ",", 
-         RowBox[{"2", 
-          RowBox[{"\[Pi]", "/", "100"}]}]}], "}"}]}], "\[IndentingNewLine]", 
-      "]"}]}], "\[IndentingNewLine]", "]"}], ";"}], "\[IndentingNewLine]", 
-  RowBox[{"(*", 
-   RowBox[{"ListAnimate", "@", "%"}], "*)"}]}], "\[IndentingNewLine]", 
+                  RowBox[{"RotationMatrix", "[", 
+                   RowBox[{"\[Omega]circ", " ", "t"}], "]"}], ".", "#"}], 
+                 "&"}], "/@", "circpts"}], "]"}], "]"}]}]}], "}"}]}], 
+         "\[IndentingNewLine]", "}"}], ",", "\[IndentingNewLine]", 
+        RowBox[{"Background", "\[Rule]", 
+         RowBox[{"Darker", "[", 
+          RowBox[{
+           RowBox[{"RGBColor", "[", 
+            RowBox[{"0", ",", ".25", ",", ".35"}], "]"}], ",", 
+           RowBox[{"3", "/", "5"}]}], "]"}]}], ",", "\[IndentingNewLine]", 
+        RowBox[{"PlotRangePadding", "\[Rule]", "0.1"}]}], 
+       "\[IndentingNewLine]", "]"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"{", 
+       RowBox[{"t", ",", "0.", ",", 
+        RowBox[{"2", "\[Pi]"}], ",", 
+        RowBox[{"2", 
+         RowBox[{"\[Pi]", "/", "100"}]}]}], "}"}]}], "\[IndentingNewLine]", 
+     "]"}]}], "\[IndentingNewLine]", "]"}], ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"(*", 
-   RowBox[{"SystemOpen", "@", 
-    RowBox[{"Export", "[", 
-     RowBox[{
-     "\"\<C:\\\\Users\\\\Nathan Chapman\\\\Desktop\\\\Aperture.gif\>\"", ",", 
-      "%", ",", 
-      RowBox[{"\"\<DisplayDurations\>\"", "\[Rule]", 
-       RowBox[{"3.", "/", "100"}]}]}], "]"}]}], "*)"}]}]}], "Input",
+   RowBox[{
+    RowBox[{"ListAnimate", "@", "%"}], "\[IndentingNewLine]", 
+    RowBox[{"SystemOpen", "@", 
+     RowBox[{"Export", "[", 
+      RowBox[{
+      "\"\<C:\\\\Users\\\\Nathan Chapman\\\\Desktop\\\\Aperture.gif\>\"", ",",
+        "%%", ",", 
+       RowBox[{"\"\<DisplayDurations\>\"", "\[Rule]", 
+        RowBox[{"3.", "/", "100"}]}]}], "]"}]}]}], "*)"}]}]}], "Input",
  CellChangeTimes->{{3.80782453091893*^9, 3.8078245361622553`*^9}, {
    3.8078247151350193`*^9, 3.8078247597452173`*^9}, {3.8078248111544485`*^9, 
    3.807824830889385*^9}, {3.8078248620846095`*^9, 3.8078248694435287`*^9}, {
@@ -379,7 +382,9 @@ Cell[BoxData[{
    3.8078250666900997`*^9}, {3.807825132595204*^9, 3.8078251627725534`*^9}, {
    3.8078253891003094`*^9, 3.8078253911076946`*^9}, {3.807825444232357*^9, 
    3.8078254523370967`*^9}, {3.807825541325843*^9, 3.8078255432727294`*^9}, {
-   3.80782575903577*^9, 3.8078257655623403`*^9}, 3.807826379781689*^9}]
+   3.80782575903577*^9, 3.8078257655623403`*^9}, 3.807826379781689*^9, 
+   3.820513646259694*^9, {3.8205137231157646`*^9, 3.8205137799769754`*^9}, 
+   3.820513965179023*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -417,11 +422,11 @@ Cell[882, 31, 127, 1, 32, "Text"],
 Cell[1012, 34, 2640, 74, 158, "Input"],
 Cell[3655, 110, 1834, 42, 233, "Input"],
 Cell[5492, 154, 5990, 139, 613, "Input"],
-Cell[11485, 295, 3813, 86, 373, "Input"]
+Cell[11485, 295, 4037, 91, 393, "Input"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[15335, 386, 108, 1, 69, "Section"],
-Cell[15446, 389, 127, 1, 32, "Text"]
+Cell[15559, 391, 108, 1, 69, "Section"],
+Cell[15670, 394, 127, 1, 35, "Text"]
 }, Closed]]
 }, Open  ]]
 }
