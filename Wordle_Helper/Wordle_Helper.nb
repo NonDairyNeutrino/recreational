@@ -1,0 +1,282 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      9974,        273]
+NotebookOptionsPosition[      8928,        233]
+NotebookOutlinePosition[      9300,        249]
+CellTagsIndexPosition[      9257,        246]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Wordle Helper", "Title",
+ CellChangeTimes->{{3.850693000487957*^9, 3.850693007535618*^9}, {
+  3.8506955386859627`*^9, 3.850695538742011*^9}}],
+
+Cell[TextData[{
+ "Some of these ideas may have been inspired by the game ",
+ ButtonBox["Mastermind",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["https://mathworld.wolfram.com/Mastermind.html"], None},
+  ButtonNote->"https://mathworld.wolfram.com/Mastermind.html"],
+ "."
+}], "Text",
+ CellChangeTimes->{{3.8507023083126187`*^9, 3.8507023498154*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Creating the domain of words", "Section",
+ CellChangeTimes->{{3.8506930119753113`*^9, 3.8506930160593734`*^9}}],
+
+Cell["Start with all 5 letter words in the English language.", "Text",
+ CellChangeTimes->{{3.8506930229746027`*^9, 3.8506930336584373`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Clear", "@", "wordDomain"}], ";", 
+  RowBox[{"wordDomain", "=", 
+   RowBox[{"Sort", "@", 
+    RowBox[{"DeleteDuplicates", "@", 
+     RowBox[{"Select", "[", 
+      RowBox[{
+       RowBox[{"Catenate", "@", 
+        RowBox[{"Select", "[", 
+         RowBox[{
+          RowBox[{"StringCases", "[", 
+           RowBox[{
+            RowBox[{"DeleteDuplicates", "@", 
+             RowBox[{"ToLowerCase", "@", 
+              RowBox[{"WordData", "[", "]"}]}]}], ",", 
+            RowBox[{"LetterCharacter", ".."}]}], "]"}], ",", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"Length", "@", "#"}], "\[Equal]", "1"}], "&"}]}], "]"}]}],
+        ",", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"StringLength", "@", "#"}], "\[Equal]", "5"}], "&"}]}], 
+      "]"}]}]}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.850688508284448*^9, 3.8506885370603714`*^9}, {
+  3.8506932220674243`*^9, 3.850693309932297*^9}, {3.8506933638018403`*^9, 
+  3.850693372816636*^9}, {3.850693423178469*^9, 3.8506934404144616`*^9}, {
+  3.8506935655428057`*^9, 3.8506936134261274`*^9}, {3.850693734665337*^9, 
+  3.8506937542325287`*^9}, {3.850693842756584*^9, 3.850693843294744*^9}, {
+  3.850693900190382*^9, 3.850693901190318*^9}, {3.8506939336014233`*^9, 
+  3.8506939638559217`*^9}, {3.8506943489521313`*^9, 3.850694372026042*^9}, {
+  3.8506944064970336`*^9, 3.850694501149663*^9}, {3.850695255756626*^9, 
+  3.8506952732640824`*^9}, {3.850695466919259*^9, 3.850695479787478*^9}, {
+  3.85069961773009*^9, 3.850699621598392*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Finding the \[OpenCurlyDoubleQuote]Best\[CloseCurlyDoubleQuote] Guess at Each \
+Step (Needs position consideration)\
+\>", "Section",
+ CellChangeTimes->{{3.850695584532214*^9, 3.850695589335972*^9}, {
+  3.8506966586132812`*^9, 3.8506966600288644`*^9}, {3.850698904071227*^9, 
+  3.8506989088030663`*^9}, {3.850700224964263*^9, 3.850700244692655*^9}}],
+
+Cell["\<\
+First we need to define what we mean by \[OpenCurlyDoubleQuote]best\
+\[CloseCurlyDoubleQuote].  The \[OpenCurlyDoubleQuote]best\
+\[CloseCurlyDoubleQuote] word should contain the most common letters while \
+still being a valid word.\
+\>", "Text",
+ CellChangeTimes->{{3.850696899594276*^9, 3.850696915115101*^9}, {
+  3.8506969551254187`*^9, 3.85069696647191*^9}}],
+
+Cell["So then we find the most common letters in our pool.", "Text",
+ CellChangeTimes->{{3.850695792899241*^9, 3.8506957984430294`*^9}, {
+  3.85069698451539*^9, 3.8506969912867794`*^9}, {3.850699059471429*^9, 
+  3.8506990651154103`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+   "Percent", " ", "total", " ", "that", " ", "has", " ", "that", " ", 
+    "letter", " ", "in", " ", "it"}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Clear", "@", "mostCommonLetters"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"mostCommonLetters", "[", "wordList_", "]"}], ":=", 
+    RowBox[{
+     RowBox[{"Reverse", "@", 
+      RowBox[{"Sort", "@", 
+       RowBox[{"Counts", "@", 
+        RowBox[{"Catenate", "@", 
+         RowBox[{"Characters", "@", "wordList"}]}]}]}]}], "//", 
+     "Keys"}]}]}]}]], "Input",
+ CellChangeTimes->{{3.850695608331276*^9, 3.8506956556223736`*^9}, {
+   3.8506958787453938`*^9, 3.85069589013702*^9}, {3.8506959509376645`*^9, 
+   3.8506959870806723`*^9}, {3.850697117951234*^9, 3.85069714079004*^9}, 
+   3.8506975238526506`*^9, {3.850699075457006*^9, 3.850699078132428*^9}, {
+   3.8506991744605455`*^9, 3.850699195231032*^9}}],
+
+Cell[BoxData[{
+ RowBox[{"Clear", "@", "bestWords"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"bestWords", "[", 
+   RowBox[{"wordList_", ",", "mostCommonLetters_"}], "]"}], ":=", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"FoldList", "[", "\[IndentingNewLine]", 
+     RowBox[{"(*", 
+      RowBox[{
+       RowBox[{"If", " ", "this", " ", "one", " ", "returns", " ", "NULL"}], 
+       ",", " ", 
+       RowBox[{"return", " ", "the", " ", "previous", " ", "iteration"}]}], 
+      "*)"}], "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"If", "[", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Select", "[", 
+           RowBox[{"#1", ",", 
+            RowBox[{"StringContainsQ", "[", "#2", "]"}]}], "]"}], "\[Equal]", 
+          RowBox[{"{", "}"}]}], ",", "\[IndentingNewLine]", 
+         RowBox[{"Select", "[", 
+          RowBox[{"#1", ",", 
+           RowBox[{"StringContainsQ", "[", "#2", "]"}]}], "]"}]}], 
+        "\[IndentingNewLine]", "]"}], "&"}], ",", "\[IndentingNewLine]", 
+      "wordList", ",", "\[IndentingNewLine]", "mostCommonLetters"}], 
+     "\[IndentingNewLine]", "]"}], "//", 
+    RowBox[{"DeleteCases", "[", 
+     RowBox[{"{", "}"}], "]"}]}], "//", "Last"}]}]}], "Input",
+ CellChangeTimes->{{3.850697053307087*^9, 3.850697094163581*^9}, {
+  3.850697144025942*^9, 3.850697244181193*^9}, {3.850697340680925*^9, 
+  3.850697422989608*^9}, {3.8506974901633534`*^9, 3.850697606402391*^9}, {
+  3.8506992625205545`*^9, 3.8506992854181757`*^9}, {3.850699373600487*^9, 
+  3.850699378755909*^9}, {3.850699415002581*^9, 3.8506994177707553`*^9}, {
+  3.8506995786363792`*^9, 3.8506995824034977`*^9}, {3.8507005275489264`*^9, 
+  3.850700574109417*^9}, {3.8507008405763693`*^9, 3.8507008534837713`*^9}, {
+  3.850701334374402*^9, 3.8507013399296*^9}, {3.850701660452591*^9, 
+  3.8507017079936743`*^9}, {3.8507017751664276`*^9, 3.850701792837907*^9}, {
+  3.850702078617606*^9, 3.8507020871934385`*^9}, {3.8507021689252734`*^9, 
+  3.850702204207225*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Best Opener/First Guess", "Subsection",
+ CellChangeTimes->{{3.850699596344563*^9, 3.850699602216208*^9}}],
+
+Cell[BoxData[
+ RowBox[{"mostCommonLetters", "@", "wordDomain"}]], "Input"],
+
+Cell[BoxData[{
+ RowBox[{"bestWords", "[", 
+  RowBox[{"wordDomain", ",", 
+   RowBox[{"mostCommonLetters", "@", "wordDomain"}]}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Reverse", "@", 
+    RowBox[{"Sort", "@", 
+     RowBox[{"Counts", "@", 
+      RowBox[{"Catenate", "@", 
+       RowBox[{"Characters", "@", "%"}]}]}]}]}], "*)"}]}]}], "Input",
+ CellChangeTimes->{{3.850699605571647*^9, 3.8506996103163815`*^9}, {
+   3.850699643451646*^9, 3.850699661858693*^9}, {3.850699772113988*^9, 
+   3.850699775746194*^9}, {3.8506998071494274`*^9, 3.8506998114318895`*^9}, 
+   3.850700887138348*^9}],
+
+Cell[TextData[{
+ "Out of these, \[OpenCurlyDoubleQuote]orate\[CloseCurlyDoubleQuote] is the \
+word whose remaining letter is the more common than that of the other words.  \
+Therefore, ",
+ StyleBox["orate",
+  FontWeight->"Bold",
+  Background->RGBColor[1, 1, 0]],
+ StyleBox[" is the \[OpenCurlyDoubleQuote]best\[CloseCurlyDoubleQuote] word \
+to open with in Wordle.",
+  Background->RGBColor[1, 1, 0]]
+}], "Text",
+ CellChangeTimes->{{3.8506980687361803`*^9, 3.8506981363216057`*^9}}],
+
+Cell["\<\
+These should be the most \[OpenCurlyDoubleQuote]efficient\
+\[CloseCurlyDoubleQuote] words to choose first/open with because they have \
+most of the most common letters.\
+\>", "Text",
+ CellChangeTimes->{{3.850697633355017*^9, 3.8506976702256565`*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Second Guess (*second breakfast pun here*)", "Section",
+ CellChangeTimes->{{3.8506982840898595`*^9, 3.850698318560852*^9}, {
+  3.8506983826137667`*^9, 3.8506983986568794`*^9}}],
+
+Cell["\<\
+So upon entering \[OpenCurlyDoubleQuote]orate\[CloseCurlyDoubleQuote] as our \
+first guess, Wordle will return some data to us.  This \
+\>", "Text",
+ CellChangeTimes->{{3.8506984519872713`*^9, 3.850698473762158*^9}}]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{958, 998},
+WindowMargins->{{Automatic, -7}, {Automatic, 0}},
+Magnification:>1.1 Inherited,
+FrontEndVersion->"10.1 for Microsoft Windows (64-bit) (March 23, 2015)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 147, 2, 99, "Title"],
+Cell[730, 26, 354, 9, 32, "Text"],
+Cell[CellGroupData[{
+Cell[1109, 39, 117, 1, 69, "Section"],
+Cell[1229, 42, 140, 1, 32, "Text"],
+Cell[1372, 45, 1543, 34, 133, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2952, 84, 358, 6, 107, "Section"],
+Cell[3313, 92, 371, 7, 53, "Text"],
+Cell[3687, 101, 237, 3, 32, "Text"],
+Cell[3927, 106, 930, 21, 73, "Input"],
+Cell[4860, 129, 2000, 41, 213, "Input"],
+Cell[CellGroupData[{
+Cell[6885, 174, 111, 1, 47, "Subsection"],
+Cell[6999, 177, 74, 1, 32, "Input"],
+Cell[7076, 180, 617, 15, 53, "Input"],
+Cell[7696, 197, 481, 11, 54, "Text"],
+Cell[8180, 210, 260, 5, 32, "Text"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8489, 221, 182, 2, 69, "Section"],
+Cell[8674, 225, 226, 4, 32, "Text"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
