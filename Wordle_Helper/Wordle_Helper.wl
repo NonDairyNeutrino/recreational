@@ -6,7 +6,7 @@
 
 (* ::Text:: *)
 (*Things that need to be done*)
-(*- Incorporate Wordle returned color/inclusional/positional data after each step*)
+(*- Incorporate validPool into bestGuess*)
 (*- Add interactivity for Wordle data*)
 (*- [Optional] Add "visualization" for the whittler.  Show sets of words at each step of whittling so you can see the progress and the pool get smaller.*)
 
@@ -33,6 +33,98 @@ wordDomain=Sort@DeleteDuplicates@(*Pick the words with 5 letters*)Select[
 
 
 (* ::Section::Closed:: *)
+(*Using Wordle Data*)
+
+
+(* ::Text:: *)
+(*So upon entering "orate" as our first guess, Wordle will return some data to us.  This data comes in the form of tiles being colored either yellow, green, or grey.  Yellow means that letter is in the word, but not in that position.  Green means that letter is in the word and in the correct position.  Grey means that letter is not in the word.*)
+
+
+(* ::Subsection::Closed:: *)
+(*Logistic Functions and Definitions*)
+
+
+Clear@"stringContains*"
+stringContainsAll[str_String, chars : {__String}] := SubsetQ[Characters@str, chars]
+stringContainsAll[chars : {__String}]@str_String := stringContainsAll[str, chars]
+
+stringContainsNone[str_String, chars : {__String}] := DisjointQ[Characters@str, chars]
+stringContainsNone[chars : {__String}]@str_String := stringContainsNone[str, chars]
+
+
+Clear@letAndPosPattern
+letAndPosPattern = {{_?LetterQ, {__Integer} | _Integer}...};
+
+
+(* ::Subsection::Closed:: *)
+(*Color Validation*)
+
+
+Clear@greenMatchQ
+(*No greens*)greenMatchQ[str_, {}] = True;
+greenMatchQ[str_, greens : letAndPosPattern] := StringTake[str, Replace[greens[[;;, 2]], pos_Integer :> {pos}, {1}]] === greens[[;;, 1]]
+
+
+(* ::Input:: *)
+(*(*Test*)greenMatchQ["orate", {{"r", 2}, {"te", {4, 5}}}]*)
+
+
+Clear@yellowMatchQ
+yellowMatchQ[str_, {}] = True;
+yellowMatchQ[str_, yellows : letAndPosPattern /; (*Makes sure each string is a single letter*)MatchQ[StringLength /@ yellows[[;;, 1]], {1 ..}]] := 
+	stringContainsAll[str, yellows[[;;, 1]]] && 
+	StringTake[str, List /@ yellows[[;;, 2]]] ~List~ yellows[[;;, 1]] // Transpose // Apply[UnsameQ, #, {1}] & // Apply@And
+
+
+(* ::Input:: *)
+(*(*Test*)yellowMatchQ["orate", {{"r", 1}, {"t", 3}, {"e", 4}}]*)
+
+
+(*Yes this is technically redundant but is redfined for the sake of consistency, understanding, readability, and to allow for input validation*)
+Clear@grayMatchQ
+grayMatchQ[str_, ""] = True;
+grayMatchQ[str_, grays_?LetterQ] := stringContainsNone[str, Characters@grays]
+
+
+(* ::Input:: *)
+(*(*Test*)grayMatchQ["orate", "qlms"]*)
+
+
+Clear@colorMatchPattern
+colorMatchPattern = {
+	"greens" -> greens : letAndPosPattern,
+	"yellows" -> yellows : letAndPosPattern,
+	"grays" -> grays_?LetterQ
+};
+
+
+Clear@colorMatchQ
+colorMatchQ[str_, colorMatchPattern] := greenMatchQ[str, greens] && yellowMatchQ[str, yellows] && grayMatchQ[str, grays]
+(*Operator Form*)colorMatchQ[colorData_]@str_ := colorMatchQ[str, colorData]
+
+
+(* ::Input:: *)
+(*(*Test*)colorMatchQ[{"greens" -> {{"o", 1}}, "yellows" -> {{"e", 2}, {"r", 3},{"a", 4}}, "grays" -> "qms"}]@"orate"*)
+
+
+(* ::Subsection::Closed:: *)
+(*Valid Word Pool*)
+
+
+Clear@validPool
+validPool[wordList_, colorData_] := Select[wordList, colorMatchQ[colorData]]
+
+
+(* ::Input:: *)
+(*validPool[wordDomain, {"greens" -> {{"b", 1}}, "yellows" -> {{"i", 3}, {"e", 4}}, "grays" -> "aow"}]*)
+(*bestGuess@%*)
+
+
+(* ::Input:: *)
+(*validPool[wordDomain, {"greens" -> {}, "yellows" -> {}, "grays" -> ""}]===wordDomain*)
+
+
+(* ::Section:: *)
 (*Finding the "Best" Guess at Each Step*)
 
 
@@ -50,8 +142,8 @@ mostCommonLetters[wordList_] := Reverse@Sort@Counts@Catenate@Characters@wordList
 
 (*The main idea is to whittle down the pool/domain of words by progressively only considering words that contain the most common letters (i.e. All the words that contain the most common letter, then out of those words, pick out all the words that contain the second most common letter, etc.).*)
 Clear@bestGuess
-bestGuess[wordList_]:= Block[
-	{pool = wordList, temp},
+bestGuess[colorData : colorMatchPattern]:= Block[
+	{wordList = validPool[(*Could configure to reference the previous validPool to be more efficient, but it's decently quick already*)wordDomain, colorData], pool = wordList, temp},
 	FoldList[
 		(*If none of the words  in the current pool contain the n-th most common letter, move on to the (n+1)th letter with the same pool*)
 		If[
@@ -82,84 +174,8 @@ bestGuess@wordDomain
 
 
 (* ::Section:: *)
-(*Using Wordle Data*)
-
-
-(* ::Text:: *)
-(*So upon entering "orate" as our first guess, Wordle will return some data to us.  This data comes in the form of tiles being colored either yellow, green, or grey.  Yellow means that letter is in the word, but not in that position.  Green means that letter is in the word and in the correct position.  Grey means that letter is not in the word.*)
-
-
-(* ::Subsection:: *)
-(*Logistic Functions and Definitions*)
-
-
-Clear@"stringContains*"
-stringContainsAll[str_String, chars : {__String}] := SubsetQ[Characters@str, chars]
-stringContainsAll[chars : {__String}]@str_String := stringContainsAll[str, chars]
-
-stringContainsNone[str_String, chars : {__String}] := DisjointQ[Characters@str, chars]
-stringContainsNone[chars : {__String}]@str_String := stringContainsNone[str, chars]
-
-
-Clear@letAndPosPattern
-letAndPosPattern = {{_?LetterQ, {__Integer} | _Integer}..};
-
-
-(* ::Subsection:: *)
-(*Color Validation*)
-
-
-Clear@greenMatchQ
-(*No greens*)greenMatchQ[str_, {}] = True;
-greenMatchQ[str_, greens : letAndPosPattern] := StringTake[str, Replace[greens[[;;, 2]], pos_Integer :> {pos}, {1}]] === greens[[;;, 1]]
+(*Main*)
 
 
 (* ::Input:: *)
-(*(*Test*)greenMatchQ["orate", {{"r", 2}, {"te", {4, 5}}}]*)
-
-
-Clear@yellowMatchQ
-yellowMatchQ[str_, {}] = True;
-yellowMatchQ[str_, yellows : letAndPosPattern /; (*Makes sure each string is a single letter*)MatchQ[StringLength /@ yellows[[;;, 1]], {1 ..}]] := 
-	stringContainsAll[str, yellows[[;;, 1]]] && 
-	StringTake[str, List /@ yellows[[;;, 2]]] ~List~ yellows[[;;, 1]] // Transpose // Apply[UnsameQ, #, {1}] & // Apply@And
-
-
-(* ::Input:: *)
-(*(*Test*)yellowMatchQ["orate", {{"r", 1}, {"t", 3}, {"e", 4}}]*)
-
-
-(*Yes this is technically redundant but is redfined for the sake of consistency, understanding, readability, and to allow for input validation*)
-Clear@grayMatchQ
-grayMatchQ[str_, {}] = True;
-grayMatchQ[str_, grays_?LetterQ] := stringContainsNone[str, Characters@grays]
-
-
-(* ::Input:: *)
-(*(*Test*)grayMatchQ["orate", "qlms"]*)
-
-
-Clear@colorMatchQ
-colorMatchQ[str_, {
-	"greens" -> greens : letAndPosPattern | {},
-	"yellows" -> yellows : letAndPosPattern | {} /; MatchQ[StringLength /@ yellows[[;;, 1]], {1 ..}],
-	"grays" -> grays_?LetterQ
-	}
-] := greenMatchQ[str, greens] && yellowMatchQ[str, yellows] && grayMatchQ[str, grays]
-(*Operator Form*)colorMatchQ[colorData_]@str_ := colorMatchQ[str, colorData]
-
-
-(* ::Input:: *)
-(*(*Test*)colorMatchQ[{"greens" -> {{"o", 1}}, "yellows" -> {{"e", 2}, {"r", 3},{"a", 4}}, "grays" -> "qms"}]@"orate"*)
-
-
-(* ::Subsection:: *)
-(*Valid Word Pool*)
-
-
-Clear@validPool
-validPool[wordList_, colorData_] := Select[wordList, colorMatchQ[colorData]]
-
-
-validPool[wordDomain, {"greens" -> {(*{"b", 1}*)}, "yellows" -> {(*{"i", 3},*) {"e", 4}}, "grays" -> "aow"}]
-bestGuess@%
+(* bestGuess[{"greens" -> {{"r", 2}, {"i", 3}, {"k", 5}, {"n", 4}}, "yellows" -> {{"k", 1}, {"i", 5}}, "grays" -> "oatebcp"}]*)
