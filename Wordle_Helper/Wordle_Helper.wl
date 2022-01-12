@@ -6,8 +6,7 @@
 
 (* ::Text:: *)
 (*Things that need to be done*)
-(*- Incorporate validPool into bestGuess*)
-(*- Add interactivity for Wordle data*)
+(*- Add interactivity for Wordle data i.e. after each step, the program prompts the user to enter the "color data" returned by Wordle.*)
 (*- [Optional] Add "visualization" for the whittler.  Show sets of words at each step of whittling so you can see the progress and the pool get smaller.*)
 
 
@@ -124,7 +123,7 @@ validPool[wordList_, colorData_] := Select[wordList, colorMatchQ[colorData]]
 (*validPool[wordDomain, {"greens" -> {}, "yellows" -> {}, "grays" -> ""}]===wordDomain*)
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*Finding the "Best" Guess at Each Step*)
 
 
@@ -171,6 +170,15 @@ bestGuess@wordDomain
 
 (* ::Text:: *)
 (*These should be the most "efficient" words to choose first/open with because they have most of the most common letters.*)
+
+
+(* ::Section:: *)
+(*Interactivity*)
+
+
+InputField[Dynamic[colorData], Expression, FieldSize -> 45, FieldHint -> "Enter color data 
+e.g. {\"greens\" \[Rule] {{\"r\", 2}, {\"it\", {3, 4}}}, \"yellows\" \[Rule] {{\"k\", 1}, {\"i\", 5}}, \"grays\" \[Rule] \"oatebcp\"}"]
+Dynamic@colorData
 
 
 (* ::Section:: *)
