@@ -5,12 +5,13 @@
 
 
 (* ::Text:: *)
-(*Things that need to be done*)
+(*Things that need to be done:*)
+(*- Restructure into proper package for release*)
 (*- [Optional] Add "visualization" for the whittler.  Show sets of words at each step of whittling so you can see the progress and the pool get smaller.*)
 
 
 (* ::Section::Closed:: *)
-(*Creating the domain of words*)
+(*Creating the Domain of Words*)
 
 
 (* ::Text:: *)
@@ -31,7 +32,7 @@ wordDomain = Sort@DeleteDuplicates@(*Pick the words with 5 letters*)Select[
 
 
 (* ::Section::Closed:: *)
-(*Using Wordle Data/Color Data to get a valid pool*)
+(*Using Wordle Data/Color Data to get a Valid Pool*)
 
 
 (* ::Text:: *)
@@ -193,31 +194,31 @@ bestGuess@wordDomain
 (*Interactivity*)
 
 
-Block[
+Clear@inputPrompt
+inputPrompt = "Enter each color data as a list of the letter and its position.  For example:
+{\"greens\" -> {{\"a\", 2}}, \"yellows\" -> {{\"o\", 1}, {\"r\", 2}}, \"grays\" -> \"temnls\"}\n\n";
+
+
+Clear@prevSug
+prevSug[prevOutput_] := "Previous suggestions:\n" <> StringRiffle[prevOutput, "\n" ] (*<> "Current suggestion: " <> Last@prevOutput*)
+
+
+Clear@inputWindow
+inputWindow[prevInput_, prevOutput_] := Input[inputPrompt <> prevSug[prevOutput], prevInput]
+
+
+(* ::Section:: *)
+(*wordleHelper/main*)
+
+
+Clear@wordleHelper
+wordleHelper[] := Block[
 	{prevInput = {"greens" -> {}, "yellows" -> {}, "grays" -> ""}, prevOutput = {}},
 	While[
 		prevInput =!= $Canceled,
-		AppendTo[
-			prevOutput,
-			bestGuess[
-				prevInput =
-				Input[
-					"Enter each color data as a list of the letter and its position.  For example:
-{\"greens\" -> {{\"a\", 2}}, \"yellows\" -> {{\"o\", 1}, {\"r\", 2}}, \"grays\" -> \"temnls\"}
-
-Previous suggestions:
-"<>StringRiffle[prevOutput, "\n" ],
-					prevInput
-				]
-			]
-		]
+		AppendTo[prevOutput, bestGuess[prevInput = inputWindow[prevInput, prevOutput]]]
 	]
 ]
 
 
-(* ::Section:: *)
-(*Main*)
-
-
-(* ::Input:: *)
-(* bestGuess[{"greens" -> {{"a", 2},{"v", 3}, {"o",4},{"r", 5}}, "yellows" -> {{"o", 1}, {"r", 2}, {"a", 3}, {"v", 1}}, "grays" -> "temnls"}]*)
+wordleHelper[]
