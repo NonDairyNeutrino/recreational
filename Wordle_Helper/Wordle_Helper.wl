@@ -6,7 +6,6 @@
 
 (* ::Text:: *)
 (*Things that need to be done*)
-(*- Add interactivity for Wordle data i.e. after each step, the program prompts the user to enter the "color data" returned by Wordle.*)
 (*- [Optional] Add "visualization" for the whittler.  Show sets of words at each step of whittling so you can see the progress and the pool get smaller.*)
 
 
@@ -19,7 +18,7 @@
 
 
 Clear@wordDomain;
-wordDomain=Sort@DeleteDuplicates@(*Pick the words with 5 letters*)Select[
+wordDomain = Sort@DeleteDuplicates@(*Pick the words with 5 letters*)Select[
 	Catenate@Select[
 		(*Pick out only the words made of letters*)StringCases[
 			(*Get all "words" Mathematica knows*)DeleteDuplicates@ToLowerCase@WordData[],
@@ -32,7 +31,7 @@ wordDomain=Sort@DeleteDuplicates@(*Pick the words with 5 letters*)Select[
 
 
 (* ::Section::Closed:: *)
-(*Using Wordle Data*)
+(*Using Wordle Data/Color Data to get a valid pool*)
 
 
 (* ::Text:: *)
@@ -59,6 +58,10 @@ letAndPosPattern = {{_?LetterQ, {__Integer} | _Integer}...};
 (*Color Validation*)
 
 
+(* ::Subsubsection::Closed:: *)
+(*Green*)
+
+
 Clear@greenMatchQ
 (*No greens*)greenMatchQ[str_, {}] = True;
 greenMatchQ[str_, greens : letAndPosPattern] := StringTake[str, Replace[greens[[;;, 2]], pos_Integer :> {pos}, {1}]] === greens[[;;, 1]]
@@ -66,6 +69,10 @@ greenMatchQ[str_, greens : letAndPosPattern] := StringTake[str, Replace[greens[[
 
 (* ::Input:: *)
 (*(*Test*)greenMatchQ["orate", {{"r", 2}, {"te", {4, 5}}}]*)
+
+
+(* ::Subsubsection::Closed:: *)
+(*Yellow*)
 
 
 Clear@yellowMatchQ
@@ -79,14 +86,24 @@ yellowMatchQ[str_, yellows : letAndPosPattern /; (*Makes sure each string is a s
 (*(*Test*)yellowMatchQ["orate", {{"r", 1}, {"t", 3}, {"e", 4}}]*)
 
 
+(* ::Subsubsection::Closed:: *)
+(*Gray*)
+
+
 (*Yes this is technically redundant but is redfined for the sake of consistency, understanding, readability, and to allow for input validation*)
 Clear@grayMatchQ
 grayMatchQ[str_, ""] = True;
+grayMatchQ[str_, grays : letAndPosPattern] := stringContainsNone[str, grays[[;;, 1]]]
 grayMatchQ[str_, grays_?LetterQ] := stringContainsNone[str, Characters@grays]
 
 
 (* ::Input:: *)
 (*(*Test*)grayMatchQ["orate", "qlms"]*)
+(*grayMatchQ["orate", {{"q", 2}, {"l", 3},{"m", 4}}]*)
+
+
+(* ::Subsubsection::Closed:: *)
+(*All Combined*)
 
 
 Clear@colorMatchPattern
@@ -176,9 +193,26 @@ bestGuess@wordDomain
 (*Interactivity*)
 
 
-InputField[Dynamic[colorData], Expression, FieldSize -> 45, FieldHint -> "Enter color data 
-e.g. {\"greens\" \[Rule] {{\"r\", 2}, {\"it\", {3, 4}}}, \"yellows\" \[Rule] {{\"k\", 1}, {\"i\", 5}}, \"grays\" \[Rule] \"oatebcp\"}"]
-Dynamic@colorData
+Block[
+	{prevInput = {"greens" -> {}, "yellows" -> {}, "grays" -> ""}, prevOutput = {}},
+	While[
+		prevInput =!= $Canceled,
+		AppendTo[
+			prevOutput,
+			bestGuess[
+				prevInput =
+				Input[
+					"Enter each color data as a list of the letter and its position.  For example:
+{\"greens\" -> {{\"a\", 2}}, \"yellows\" -> {{\"o\", 1}, {\"r\", 2}}, \"grays\" -> \"temnls\"}
+
+Previous suggestions:
+"<>StringRiffle[prevOutput, "\n" ],
+					prevInput
+				]
+			]
+		]
+	]
+]
 
 
 (* ::Section:: *)
@@ -186,4 +220,4 @@ Dynamic@colorData
 
 
 (* ::Input:: *)
-(* bestGuess[{"greens" -> {{"r", 2}, {"i", 3}, {"k", 5}, {"n", 4}}, "yellows" -> {{"k", 1}, {"i", 5}}, "grays" -> "oatebcp"}]*)
+(* bestGuess[{"greens" -> {{"a", 2},{"v", 3}, {"o",4},{"r", 5}}, "yellows" -> {{"o", 1}, {"r", 2}, {"a", 3}, {"v", 1}}, "grays" -> "temnls"}]*)
