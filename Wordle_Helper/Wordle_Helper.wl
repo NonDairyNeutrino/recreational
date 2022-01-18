@@ -198,7 +198,7 @@ bestGuess[{"greens" -> {}, "yellows" -> {}, "grays" -> ""}]
 (*These should be the most "efficient" words to choose first/open with because they have most of the most common letters.*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Interactivity*)
 
 
@@ -212,11 +212,11 @@ In case of a bigger emergency, enter \"Quit[]\" or \"Exit[]\".
 
 
 Clear@prevSug
-prevSug[prevOutputList_] := Row["Previous suggestions:\n" <> StringRiffle[prevOutputList, "\n" ], WordCloud[]]
+prevSug[prevOutputList_] := "Previous suggestions:\n" <> StringRiffle[prevOutputList, "\n" ]
 
 
 Clear@inputWindow
-inputWindow[prevInput_, prevOutputList_] :=  [inputPrompt <> prevSug[prevOutputList], prevInput]
+inputWindow[prevInput_, prevOutputList_] :=  Input[inputPrompt <> prevSug[prevOutputList], prevInput]
 
 
 (* ::Section:: *)
@@ -242,3 +242,6 @@ wordleHelper[] := Block[
 		]
 	]
 ]
+
+
+wordleHelper[]
