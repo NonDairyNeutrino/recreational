@@ -6,8 +6,12 @@
 
 (* ::Text:: *)
 (*Things that need to be done:*)
+(*- Add word cloud*)
+(*	- Needs bestGuessList that contains all valid words in decreasing likelihood, with option to give subset of list like the first most likely through the n-th, or n-th through m-th.*)
+(*		- Would like to run bestGuess, then delete the ouput form the pool of considered words, then run bestGuess on that pool to get the 2nd most likely word, repeat.*)
+(*- Add consideration for "vowel optimization" as a metric (In addition to most common letters, also consider words that have the most vowels in them because you can throw out a lot of words that have some vowel in it). From thewanderebard_ "Finding words that fit your current rules with the most vowels"*)
 (*- Restructure into proper package for release*)
-(*- [Optional] Add "visualization" for the whittler.  Show sets of words at each step of whittling so you can see the progress and the pool get smaller.*)
+(*	- Add engine functionality? (Maybe just manually loop bestGuess with Wordle data)*)
 
 
 (* ::Section::Closed:: *)
@@ -134,14 +138,14 @@ validPool[wordList_, colorData_] := Select[wordList, colorMatchQ[colorData]]
 
 (* ::Input:: *)
 (*validPool[wordDomain, {"greens" -> {{"b", 1}}, "yellows" -> {{"i", 3}, {"e", 4}}, "grays" -> "aow"}]*)
-(*bestGuess@%*)
+(*bestGuess@{"greens" -> {{"b", 1}}, "yellows" -> {{"i", 3}, {"e", 4}}, "grays" -> "aow"}*)
 
 
 (* ::Input:: *)
 (*validPool[wordDomain, {"greens" -> {}, "yellows" -> {}, "grays" -> ""}]===wordDomain*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Finding the "Best" Guess at Each Step*)
 
 
@@ -175,11 +179,15 @@ bestGuess[colorData : colorMatchPattern]:= Block[
 ]
 
 
+Clear@bestGuessList
+bestGuessList[colorData : colorMatchPattern] := bestGuess[colorData]
+
+
 (* ::Subsection::Closed:: *)
 (*Best Opener/First Guess*)
 
 
-bestGuess@wordDomain
+bestGuess[{"greens" -> {}, "yellows" -> {}, "grays" -> ""}]
 
 
 (* ::Text:: *)
@@ -190,35 +198,47 @@ bestGuess@wordDomain
 (*These should be the most "efficient" words to choose first/open with because they have most of the most common letters.*)
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*Interactivity*)
 
 
 Clear@inputPrompt
-inputPrompt = "Enter each color data as a list of the letter and its position.  For example:
-{\"greens\" -> {{\"a\", 2}}, \"yellows\" -> {{\"o\", 1}, {\"r\", 2}}, \"grays\" -> \"temnls\"}\n\n";
+inputPrompt = "Enter each color data as a list of the letter and its position. e.g. {\"greens\" -> {{\"a\", 2}}, \"yellows\" -> {{\"o\", 1}, {\"r\", 2}}, \"grays\" -> \"temnls\"}
+
+In case of emergency, enter \"Break[]\" or \"Abort[]\".
+In case of a bigger emergency, enter \"Quit[]\" or \"Exit[]\".
+
+";
 
 
 Clear@prevSug
-prevSug[prevOutput_] := "Previous suggestions:\n" <> StringRiffle[prevOutput, "\n" ] (*<> "Current suggestion: " <> Last@prevOutput*)
+prevSug[prevOutputList_] := Row["Previous suggestions:\n" <> StringRiffle[prevOutputList, "\n" ], WordCloud[]]
 
 
 Clear@inputWindow
-inputWindow[prevInput_, prevOutput_] := Input[inputPrompt <> prevSug[prevOutput], prevInput]
+inputWindow[prevInput_, prevOutputList_] :=  [inputPrompt <> prevSug[prevOutputList], prevInput]
 
 
 (* ::Section:: *)
 (*wordleHelper/main*)
 
 
+echo[expr_] := (Print@expr; expr)
+
+
 Clear@wordleHelper
 wordleHelper[] := Block[
-	{prevInput = {"greens" -> {}, "yellows" -> {}, "grays" -> ""}, prevOutput = {}},
+	{prevInput = {"greens" -> {}, "yellows" -> {}, "grays" -> ""}, prevInputTemp, prevOutputList = {}, tempGuess},
 	While[
-		prevInput =!= $Canceled,
-		AppendTo[prevOutput, bestGuess[prevInput = inputWindow[prevInput, prevOutput]]]
+		True,
+		tempGuess = bestGuess[prevInputTemp = inputWindow[prevInput, prevOutputList]];
+		Which[
+			prevInputTemp === $Canceled,
+			Break[],
+			Head@tempGuess =!= bestGuess,
+			(prevInput = prevInputTemp); AppendTo[prevOutputList, tempGuess],
+			Head@tempGuess === bestGuess,
+			AppendTo[prevOutputList, "That didn't work. Check for errors and try again."]
+		]
 	]
 ]
-
-
-wordleHelper[]
