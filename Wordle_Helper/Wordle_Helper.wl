@@ -9,7 +9,9 @@
 (*- Add word cloud*)
 (*	- Needs bestGuessList that contains all valid words in decreasing likelihood, with option to give subset of list like the first most likely through the n-th, or n-th through m-th.*)
 (*		- Would like to run bestGuess, then delete the ouput form the pool of considered words, then run bestGuess on that pool to get the 2nd most likely word, repeat.*)
+(*- Add check for fail state*)
 (*- Add consideration for "vowel optimization" as a metric (In addition to most common letters, also consider words that have the most vowels in them because you can throw out a lot of words that have some vowel in it). From thewanderebard_ "Finding words that fit your current rules with the most vowels"*)
+(*- Add row of 5 boxes you can type into and then click to cycle through the colors for easier input of wordle data*)
 (*- Restructure into proper package for release*)
 (*	- Add engine functionality? (Maybe just manually loop bestGuess with Wordle data)*)
 
@@ -18,21 +20,10 @@
 (*Creating the Domain of Words*)
 
 
-(* ::Text:: *)
-(*Start with all 5 letter words in the English language.*)
+SetDirectory@NotebookDirectory[]
 
 
-Clear@wordDomain;
-wordDomain = Sort@DeleteDuplicates@(*Pick the words with 5 letters*)Select[
-	Catenate@Select[
-		(*Pick out only the words made of letters*)StringCases[
-			(*Get all "words" Mathematica knows*)DeleteDuplicates@ToLowerCase@WordData[],
-			LetterCharacter..
-		],
-		Length@# == 1 &
-	],
-	StringLength@# == 5 &
-];
+<<"wordDomain.wl"
 
 
 (* ::Section::Closed:: *)
@@ -40,7 +31,7 @@ wordDomain = Sort@DeleteDuplicates@(*Pick the words with 5 letters*)Select[
 
 
 (* ::Text:: *)
-(*So upon entering "orate" as our first guess, Wordle will return some data to us.  This data comes in the form of tiles being colored either yellow, green, or grey.  Yellow means that letter is in the word, but not in that position.  Green means that letter is in the word and in the correct position.  Grey means that letter is not in the word.*)
+(*So upon entering "arose" as our first guess, Wordle will return some data to us.  This data comes in the form of tiles being colored either yellow, green, or grey.  Yellow means that letter is in the word, but not in that position.  Green means that letter is in the word and in the correct position.  Grey means that letter is not in the word.*)
 
 
 (* ::Subsection::Closed:: *)
@@ -158,12 +149,12 @@ validPool[wordList_, colorData_] := Select[wordList, colorMatchQ[colorData]]
 
 
 Clear@mostCommonLetters
-mostCommonLetters[wordList_] := Reverse@Sort@Counts@Catenate@Characters@wordList//Keys
+mostCommonLetters[wordList_] := Reverse@Sort@Counts@Catenate@Characters@wordList // Keys
 
 
 (*The main idea is to whittle down the pool/domain of words by progressively only considering words that contain the most common letters (i.e. All the words that contain the most common letter, then out of those words, pick out all the words that contain the second most common letter, etc.).*)
 Clear@bestGuess
-bestGuess[colorData : colorMatchPattern]:= Block[
+bestGuess[colorData : colorMatchPattern] := Block[
 	{wordList = validPool[(*Could configure to reference the previous validPool to be more efficient, but it's decently quick already*)wordDomain, colorData], pool = wordList, temp},
 	FoldList[
 		(*If none of the words  in the current pool contain the n-th most common letter, move on to the (n+1)th letter with the same pool*)
@@ -187,11 +178,12 @@ bestGuessList[colorData : colorMatchPattern] := bestGuess[colorData]
 (*Best Opener/First Guess*)
 
 
-bestGuess[{"greens" -> {}, "yellows" -> {}, "grays" -> ""}]
+Clear@bestOpeners
+bestOpeners = bestGuess[{"greens" -> {}, "yellows" -> {}, "grays" -> ""}]
 
 
 (* ::Text:: *)
-(*Out of these, "orate" is the word whose remaining letter is the more common than that of the other words.  Therefore, orate is the "best" word to open with in Wordle.*)
+(*Out of these, "arose" is the word whose remaining letter is the more common than that of the other words.  Therefore, arose is the "best" word to open with in Wordle.*)
 
 
 (* ::Text:: *)
@@ -203,7 +195,10 @@ bestGuess[{"greens" -> {}, "yellows" -> {}, "grays" -> ""}]
 
 
 Clear@inputPrompt
-inputPrompt = "Enter each color data as a list of the letter and its position. e.g. {\"greens\" -> {{\"a\", 2}}, \"yellows\" -> {{\"o\", 1}, {\"r\", 2}}, \"grays\" -> \"temnls\"}
+inputPrompt = "Enter each color data as a list of the letter and its position. For example {\"greens\" -> {{\"a\", 2}}, \"yellows\" -> {{\"o\", 1}, {\"r\", 2}}, \"grays\" -> \"temnls\"}
+
+To submit your data, either press \"Enter\" or click \"OK\".
+When finished, click \"Cancel\".
 
 In case of emergency, enter \"Break[]\" or \"Abort[]\".
 In case of a bigger emergency, enter \"Quit[]\" or \"Exit[]\".
@@ -212,7 +207,7 @@ In case of a bigger emergency, enter \"Quit[]\" or \"Exit[]\".
 
 
 Clear@prevSug
-prevSug[prevOutputList_] := "Previous suggestions:\n" <> StringRiffle[prevOutputList, "\n" ]
+prevSug[prevOutputList_] := "Previous suggestions:\n"<> ToString@bestOpeners <> "\n" <> StringRiffle[prevOutputList, "\n" ]
 
 
 Clear@inputWindow
@@ -221,9 +216,6 @@ inputWindow[prevInput_, prevOutputList_] :=  Input[inputPrompt <> prevSug[prevOu
 
 (* ::Section:: *)
 (*wordleHelper/main*)
-
-
-echo[expr_] := (Print@expr; expr)
 
 
 Clear@wordleHelper
