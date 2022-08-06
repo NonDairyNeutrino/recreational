@@ -1,0 +1,661 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     23650,        652]
+NotebookOptionsPosition[     21931,        592]
+NotebookOutlinePosition[     22306,        608]
+CellTagsIndexPosition[     22263,        605]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["What are the Fourier Series and Transform?", "Title",
+ CellChangeTimes->{{3.8076606360514355`*^9, 3.80766065316267*^9}, {
+  3.8076615713644457`*^9, 3.8076615866056957`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Visualizing a vector", "Section",
+ CellChangeTimes->{{3.807661713308075*^9, 3.80766173918686*^9}}],
+
+Cell["\<\
+(*Done!*) Plot the components of a vector as a list plot.
+Show still components as well as animations of vectors that change in time.\
+\>", "Text",
+ CellChangeTimes->{{3.8076619844080563`*^9, 3.807662001394745*^9}, {
+  3.807662097182426*^9, 3.8076621189493694`*^9}, {3.8076661720693207`*^9, 
+  3.807666181329832*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Why", " ", "include", " ", 
+    RowBox[{"this", "?", " ", "Prudent"}], " ", "programming"}], "*)"}], 
+  RowBox[{
+   RowBox[{"Clear", "@", "vec"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Consider", " ", "a", " ", "unit", " ", "vector", " ", "in", " ", "polar",
+      " ", "coordinates"}], "*)"}], 
+   RowBox[{
+    RowBox[{"vec", "[", "t_", "]"}], ":=", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"Cos", "@", "t"}], ",", 
+      RowBox[{"Sin", "@", "t"}]}], "}"}]}]}]}]], "Input",
+ CellChangeTimes->{{3.8076648279462175`*^9, 3.8076649251184907`*^9}, 
+   3.807664977402166*^9, {3.807665012825487*^9, 3.8076650242797165`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Clear", "@", "thicc"}], ";", 
+  RowBox[{"thicc", "=", 
+   RowBox[{"Thickness", "[", "0.007", "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.807665581571786*^9, 3.8076655948930073`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"GraphicsRow", "[", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"{", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"ParametricPlot", "[", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"vec", "[", "t", "]"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"{", 
+          RowBox[{"t", ",", "0", ",", 
+           RowBox[{"2", "\[Pi]"}]}], "}"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"Epilog", "\[Rule]", 
+          RowBox[{"{", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"PointSize", "[", "0.03", "]"}], ",", "Red", ",", 
+              RowBox[{"Point", "@", 
+               RowBox[{"vec", "[", "tp", "]"}]}]}], "}"}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{"{", 
+             RowBox[{"thicc", ",", 
+              RowBox[{"Arrow", "@", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"{", 
+                  RowBox[{"0", ",", "0"}], "}"}], ",", 
+                 RowBox[{"vec", "[", "tp", "]"}]}], "}"}]}]}], "}"}]}], 
+           "\[IndentingNewLine]", "}"}]}]}], "\[IndentingNewLine]", 
+        RowBox[{"(*", 
+         RowBox[{"PlotLabel", "\[Rule]", "\"\<The vector\>\""}], "*)"}], 
+        "\[IndentingNewLine]", "]"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"ListPlot", "[", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"vec", "[", "tp", "]"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"PlotStyle", "\[Rule]", 
+          RowBox[{"Directive", "[", 
+           RowBox[{
+            RowBox[{"PointSize", "[", "0.03", "]"}], ",", "Red"}], "]"}]}], 
+         ",", "\[IndentingNewLine]", 
+         RowBox[{"PlotRange", "\[Rule]", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"0.5", ",", "2.5"}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"-", "1"}], ",", "1"}], "}"}]}], "}"}]}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"(*", 
+          RowBox[{
+           RowBox[{
+           "PlotLabel", "\[Rule]", "\"\<Components of the vector\>\""}], 
+           ","}], "*)"}], "\[IndentingNewLine]", 
+         RowBox[{"Epilog", "\[Rule]", 
+          RowBox[{"Array", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"thicc", ",", 
+               RowBox[{"Arrow", "[", 
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"{", 
+                   RowBox[{"#", ",", "0"}], "}"}], ",", 
+                  RowBox[{"{", 
+                   RowBox[{"#", ",", 
+                    RowBox[{
+                    RowBox[{"vec", "[", "tp", "]"}], "\[LeftDoubleBracket]", 
+                    "#", "\[RightDoubleBracket]"}]}], "}"}]}], "}"}], "]"}]}],
+               "}"}], "&"}], ",", "2"}], "]"}]}]}], "\[IndentingNewLine]", 
+        "]"}]}], "\[IndentingNewLine]", "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"ImageSize", "\[Rule]", 
+      RowBox[{"10", "*", "72"}]}]}], "\[IndentingNewLine]", "]"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{"tp", ",", "0", ",", 
+     RowBox[{"2", "\[Pi]"}], ",", "Animator"}], "}"}]}], 
+  "\[IndentingNewLine]", "]"}]], "Input",
+ CellChangeTimes->{{3.8076650563408866`*^9, 3.8076652777808084`*^9}, {
+  3.8076653163297873`*^9, 3.8076654789637423`*^9}, {3.807665515021935*^9, 
+  3.807665603961977*^9}, {3.8076656889983635`*^9, 3.8076656903946934`*^9}, {
+  3.8076658127991843`*^9, 3.8076658221089926`*^9}, {3.8076658672628946`*^9, 
+  3.807665921532727*^9}, {3.8076660189497623`*^9, 3.8076660418279066`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Bases", "Section",
+ CellChangeTimes->{{3.8076617415156317`*^9, 3.807661743002654*^9}, {
+  3.80766195278928*^9, 3.807661953304929*^9}}],
+
+Cell[TextData[{
+ StyleBox["Outline of ideas to implement",
+  FontWeight->"Bold"],
+ "\nWhat does it mean to have and choose a basis?\nTalk about inner products.\
+\nExplain how this also corresponds to functions, and then make the \
+equivalence between the finite and discrete version of a vector to the \
+function vector.\nTalk about the distribution of component values.  Make the \
+corollary to derivatives being able to thought of as how things change in \
+different \[OpenCurlyDoubleQuote]directions\[CloseCurlyDoubleQuote]."
+}], "Text",
+ CellChangeTimes->{{3.8076620306245546`*^9, 3.8076620602052298`*^9}, {
+   3.80766237565841*^9, 3.807662409836194*^9}, 3.8076625276912203`*^9, {
+   3.807663168190833*^9, 3.8076632196148434`*^9}, {3.807666378308389*^9, 
+   3.807666389625292*^9}, {3.807666706314712*^9, 3.807666747765524*^9}}],
+
+Cell[TextData[{
+ "\[OpenCurlyDoubleQuote]A vector is an element of a vector space\
+\[CloseCurlyDoubleQuote] and also \[OpenCurlyDoubleQuote]A vector is a vector\
+\[CloseCurlyDoubleQuote].  The key part here is that vectors themselves don\
+\[CloseCurlyQuote]t depend on the choice of basis.  There are a few \
+properties of vectors that illuminate this fact, namely the norm of the \
+vector.  With a choice of basis, we can represent the vector as a linear \
+combination of the basis vectors.  ",
+ StyleBox["The choice of basis determines the component representation of the \
+vector",
+  FontWeight->"Bold"],
+ ". (*This fact is almost exactly the idea behind the Fourier representation \
+of a function.*)"
+}], "Text",
+ CellChangeTimes->{{3.8076662565378513`*^9, 3.8076663288475213`*^9}, {
+  3.807666412272566*^9, 3.807666561169163*^9}, {3.8076666481206956`*^9, 
+  3.807666689759721*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Consider", " ", "a", " ", "vector", " ", "in", " ", 
+    RowBox[{"R", "^", "2."}]}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Graphics", "[", 
+    RowBox[{"{", 
+     RowBox[{"thicc", ",", 
+      RowBox[{"Arrow", "@", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"0", ",", "0"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"1", ",", "1"}], "}"}]}], "}"}]}]}], "}"}], "]"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "What", " ", "are", " ", "the", " ", "components", " ", "of", " ", "this",
+      " ", 
+     RowBox[{
+      RowBox[{"vector", "?", "  ", "Psych"}], "!"}], "  ", 
+     RowBox[{"It", "'"}], "s", " ", "a", " ", "trick", " ", 
+     RowBox[{"question", "."}]}], "*)"}]}]}]], "Input",
+ CellChangeTimes->{{3.8076667698704643`*^9, 3.8076668464858274`*^9}}],
+
+Cell["\<\
+The above is a trick question because the components depend on the choice of \
+basis.  So let\[CloseCurlyQuote]s choose some bases.\
+\>", "Text",
+ CellChangeTimes->{{3.807666858143635*^9, 3.8076669088250504`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{"Clear", "@", "v"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"v", "=", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "1"}], "}"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.807667901070817*^9, 3.807667910651428*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Graphics", "[", "\[IndentingNewLine]", 
+  RowBox[{"{", 
+   RowBox[{"thicc", ",", "\[IndentingNewLine]", 
+    RowBox[{"(*", 
+     RowBox[{"Vector", " ", "in", " ", "question"}], "*)"}], 
+    RowBox[{"{", 
+     RowBox[{"Arrow", "@", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"0", ",", "0"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1"}], "}"}]}], "}"}]}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"(*", 
+     RowBox[{"Basis", " ", "vector", " ", "1"}], "*)"}], " ", 
+    RowBox[{"{", 
+     RowBox[{"Arrow", "@", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"0", ",", "0"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "0"}], "}"}]}], "}"}]}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{"Style", "[", 
+      RowBox[{
+       RowBox[{"Text", "[", 
+        RowBox[{"\"\<x\>\"", ",", 
+         RowBox[{"{", 
+          RowBox[{"1.05", ",", "0"}], "}"}]}], "]"}], ",", "Bold", ",", 
+       "15"}], "]"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{"(*", 
+     RowBox[{"Basis", " ", "vector", " ", "2"}], "*)"}], 
+    RowBox[{"{", 
+     RowBox[{"Arrow", "@", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"0", ",", "0"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"0", ",", "1"}], "}"}]}], "}"}]}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{"Style", "[", 
+      RowBox[{
+       RowBox[{"Text", "[", 
+        RowBox[{"\"\<y\>\"", ",", 
+         RowBox[{"{", 
+          RowBox[{"0", ",", "1.05"}], "}"}]}], "]"}], ",", "Bold", ",", 
+       "15"}], "]"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{"(*", 
+     RowBox[{"Prime", " ", "Basis", " ", "vector", " ", "1"}], "*)"}], " ", 
+    RowBox[{"{", 
+     RowBox[{"Dashed", ",", 
+      RowBox[{"Arrow", "@", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"0", ",", "0"}], "}"}], ",", 
+         RowBox[{
+          RowBox[{"RotationMatrix", "[", 
+           RowBox[{"\[Pi]", "/", "3"}], "]"}], ".", 
+          RowBox[{"{", 
+           RowBox[{"1", ",", "0"}], "}"}]}]}], "}"}]}]}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{"Style", "[", 
+      RowBox[{
+       RowBox[{"Text", "[", 
+        RowBox[{"\"\<x'\>\"", ",", 
+         RowBox[{
+          RowBox[{"RotationMatrix", "[", 
+           RowBox[{"\[Pi]", "/", "3"}], "]"}], ".", 
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"1", ",", "0"}], "}"}], "+", 
+            RowBox[{"{", 
+             RowBox[{"0.05", ",", "0"}], "}"}]}], ")"}]}]}], "]"}], ",", 
+       "Bold", ",", "15"}], "]"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{"(*", 
+     RowBox[{"Prime", " ", "Basis", " ", "vector", " ", "2"}], "*)"}], " ", 
+    RowBox[{"{", 
+     RowBox[{"Dashed", ",", 
+      RowBox[{"Arrow", "@", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"0", ",", "0"}], "}"}], ",", 
+         RowBox[{
+          RowBox[{"RotationMatrix", "[", 
+           RowBox[{"\[Pi]", "/", "3"}], "]"}], ".", 
+          RowBox[{"{", 
+           RowBox[{"0", ",", "1"}], "}"}]}]}], "}"}]}]}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{"Style", "[", 
+      RowBox[{
+       RowBox[{"Text", "[", 
+        RowBox[{"\"\<y'\>\"", ",", 
+         RowBox[{
+          RowBox[{"RotationMatrix", "[", 
+           RowBox[{"\[Pi]", "/", "3"}], "]"}], ".", 
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"0", ",", "1"}], "}"}], "+", 
+            RowBox[{"{", 
+             RowBox[{"0", ",", "0.05"}], "}"}]}], ")"}]}]}], "]"}], ",", 
+       "Bold", ",", "15"}], "]"}], "}"}]}], "\[IndentingNewLine]", "}"}], 
+  "\[IndentingNewLine]", "]"}]], "Input",
+ CellChangeTimes->{{3.8076669199598284`*^9, 3.8076672374156685`*^9}, {
+  3.807667283809986*^9, 3.807667376322129*^9}, {3.8076674255689054`*^9, 
+  3.807667430668166*^9}, {3.807667461412637*^9, 3.80766746355747*^9}}],
+
+Cell["\<\
+Now that we have some bases, we can find the components of the vector in them.\
+\>", "Text",
+ CellChangeTimes->{{3.80766747461276*^9, 3.8076674949999523`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{"Clear", "[", 
+  RowBox[{"basis", ",", "primebasis"}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"basis", "=", 
+  RowBox[{"IdentityMatrix", "[", "2", "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"primebasis", "=", 
+  RowBox[{"Transpose", "@", 
+   RowBox[{"RotationMatrix", "[", 
+    RowBox[{"\[Pi]", "/", "3"}], "]"}]}]}]}], "Input",
+ CellChangeTimes->{{3.807667525890613*^9, 3.807667679269055*^9}}],
+
+Cell["\<\
+The eagle eyed among you may be asking \[OpenCurlyDoubleQuote]How can we \
+determine the components of the basis vectors without first choosing a basis?\
+\[CloseCurlyDoubleQuote], and that\[CloseCurlyQuote]s a good question.  The \
+components of the \[OpenCurlyDoubleQuote]prime basis\[CloseCurlyDoubleQuote] \
+are with respect to the vectors of the \[OpenCurlyDoubleQuote]regular\
+\[CloseCurlyDoubleQuote] basis.\
+\>", "Text",
+ CellChangeTimes->{{3.807667683775157*^9, 3.8076677572767644`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{
+    "What", " ", "are", " ", "the", " ", "components", " ", "of", " ", "v", 
+     " ", "with", " ", "respect", " ", "to", " ", 
+     RowBox[{"basis", "?", "  ", "Well"}]}], ",", " ", 
+    RowBox[{"we", " ", "use", " ", 
+     RowBox[{"Fourier", "'"}], "s", " ", 
+     RowBox[{"trick", "."}]}]}], "*)"}], 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"basis", "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}],
+       ".", "v"}], ",", 
+     RowBox[{
+      RowBox[{"basis", "\[LeftDoubleBracket]", "2", "\[RightDoubleBracket]"}],
+       ".", "v"}]}], "}"}], "\[IndentingNewLine]", 
+   RowBox[{"basis", ".", "v"}]}]}]], "Input",
+ CellChangeTimes->{{3.80766792865016*^9, 3.807668079587643*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+   "What", " ", "are", " ", "the", " ", "components", " ", "of", " ", "v", 
+    " ", "with", " ", "respect", " ", "to", " ", 
+    RowBox[{"primebasis", "?"}]}], "*)"}], 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+      "primebasis", "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}], 
+      ".", "v"}], ",", 
+     RowBox[{
+      RowBox[{
+      "primebasis", "\[LeftDoubleBracket]", "2", "\[RightDoubleBracket]"}], 
+      ".", "v"}]}], "}"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Sum", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{
+        "primebasis", "\[LeftDoubleBracket]", "k", "\[RightDoubleBracket]"}], 
+        ".", "v"}], " ", 
+       RowBox[{
+       "primebasis", "\[LeftDoubleBracket]", "k", "\[RightDoubleBracket]"}]}],
+       ",", 
+      RowBox[{"{", 
+       RowBox[{"k", ",", 
+        RowBox[{"Length", "@", "primebasis"}]}], "}"}]}], "]"}], "//", 
+    "Simplify"}]}]}]], "Input",
+ CellChangeTimes->{{3.80766792865016*^9, 3.8076681136061373`*^9}, {
+  3.807668168040783*^9, 3.807668215762294*^9}, {3.8076682774684772`*^9, 
+  3.807668335664667*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["What is a Fourier \[OpenCurlyDoubleQuote]representation\
+\[CloseCurlyDoubleQuote]?", "Section",
+ CellChangeTimes->{{3.8076625392789893`*^9, 3.80766254721894*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Bases of orthogonal trig functions", "Subsection",
+ CellChangeTimes->{{3.8076626381705427`*^9, 3.8076626482029634`*^9}}],
+
+Cell["\<\
+Show how the standard trig functions are orthogonal via the integral inner \
+product.\
+\>", "Text",
+ CellChangeTimes->{{3.8076626987460933`*^9, 3.80766274381287*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Fourier Series", "Subsection",
+ CellChangeTimes->{{3.8076625540996943`*^9, 3.807662556387146*^9}}],
+
+Cell[TextData[{
+ "Talk about basic/fundamental theorems and conditions on Fourier Series.  \
+Consult Haberman about convergence of series and something along the lines of \
+\[OpenCurlyDoubleQuote]This function ",
+ StyleBox["has the Fourier Series",
+  FontSlant->"Italic"],
+ "\[CloseCurlyDoubleQuote] as opposed to have a strict equality;  maybe get \
+into pointwise convergence of series of functions vs the (maybe?) required \
+absolute convergence."
+}], "Text",
+ CellChangeTimes->{{3.8076627496533484`*^9, 3.8076627627013288`*^9}, {
+  3.8076629144347095`*^9, 3.8076629601124744`*^9}, {3.8076630447166066`*^9, 
+  3.8076630808038073`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Fourier Transform", "Subsection",
+ CellChangeTimes->{{3.8076625599975834`*^9, 3.8076625680413485`*^9}}],
+
+Cell["\<\
+Bring then the previous discussion back to the transition between discrete \
+vectors and \[OpenCurlyDoubleQuote]continuous\[CloseCurlyDoubleQuote] vectors.\
+\>", "Text",
+ CellChangeTimes->{{3.807663109782344*^9, 3.8076631438042417`*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Other stuff", "Section",
+ CellChangeTimes->{{3.80766251828414*^9, 3.8076625192710404`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"FourierTransform", "[", 
+  RowBox[{"(*", 
+   RowBox[{"Assuming", " ", "bees", " ", "is", " ", "constant"}], "*)"}], 
+  RowBox[{"bees", ",", "air", ",", "momentum"}], "]"}]], "Input",
+ CellChangeTimes->{{3.807662415760013*^9, 3.8076624838518505`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"\"\<f[t_]:=Exp[-t^2/2]\>\"", "\[Equal]", 
+  "\"\<f=(Exp[-#^2/2]&)\>\""}]], "Input",
+ CellChangeTimes->{{3.8076638944347105`*^9, 3.807663917283329*^9}}],
+
+Cell[BoxData[{
+ RowBox[{"Clear", "@", "cm"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"cm", "=", 
+   RowBox[{"72", "/", "2.54"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"10", "cm"}]}], "Input",
+ CellChangeTimes->{{3.8076645933396835`*^9, 3.8076646011450405`*^9}, {
+  3.8076646430073385`*^9, 3.8076646466910925`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Block", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"f", "=", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"Exp", "[", 
+         RowBox[{
+          RowBox[{"-", 
+           RowBox[{"#", "^", "2"}]}], "/", "2"}], "]"}], "&"}], ")"}]}], ",", 
+     RowBox[{"ff", "=", 
+      RowBox[{"Function", "[", 
+       RowBox[{"\[Omega]", ",", 
+        RowBox[{"Evaluate", "@", 
+         RowBox[{"FourierTransform", "[", 
+          RowBox[{
+           RowBox[{"f", "[", "t", "]"}], ",", "t", ",", "\[Omega]"}], 
+          "]"}]}]}], "]"}]}]}], "}"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"GraphicsRow", "[", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"{", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"Plot", "[", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"f", "[", "t", "]"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"{", 
+          RowBox[{"t", ",", 
+           RowBox[{"-", "\[Pi]"}], ",", "\[Pi]"}], "}"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"AxesLabel", "\[Rule]", 
+          RowBox[{"{", 
+           RowBox[{"\"\<Time t\>\"", ",", "None"}], "}"}]}]}], 
+        "\[IndentingNewLine]", "]"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"Plot", "[", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"ff", "[", "\[Omega]", "]"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"{", 
+          RowBox[{"\[Omega]", ",", 
+           RowBox[{"-", "\[Pi]"}], ",", "\[Pi]"}], "}"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"AxesLabel", "\[Rule]", 
+          RowBox[{"{", 
+           RowBox[{"\"\<Frequency \[Omega]\>\"", ",", "None"}], "}"}]}]}], 
+        "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", "}"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"ImageSize", "\[Rule]", "Full"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"AspectRatio", "\[Rule]", "0.25"}]}], "\[IndentingNewLine]", 
+    "]"}]}], "\[IndentingNewLine]", "]"}]], "Input",
+ CellChangeTimes->{{3.807663253880061*^9, 3.807663352685536*^9}, {
+   3.807663637349059*^9, 3.807663827918474*^9}, {3.8076639540399313`*^9, 
+   3.807663989641671*^9}, 3.807664036607989*^9, {3.8076640702422404`*^9, 
+   3.8076641277364693`*^9}, {3.8076642132997694`*^9, 3.807664305599142*^9}, {
+   3.807664438693227*^9, 3.8076644414329605`*^9}, {3.8076644988912096`*^9, 
+   3.8076645112779894`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{"FourierTransform", "[", 
+  RowBox[{
+   RowBox[{"Exp", "[", 
+    RowBox[{
+     RowBox[{"-", 
+      RowBox[{"t", "^", "2"}]}], "/", "2"}], "]"}], ",", "t", ",", 
+   "\[Omega]"}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Hey", ",", " ", 
+    RowBox[{"look", " ", "at", " ", 
+     RowBox[{"that", "!"}], " ", "The", " ", "Guassian", " ", "is", " ", 
+     "the", " ", "eigenfunction", " ", "of", " ", "the", " ", "Fourier", " ", 
+     "Transform", " ", "operator"}]}], "*)"}]}]}], "Input",
+ CellChangeTimes->{{3.807663547579536*^9, 3.807663615617523*^9}}]
+}, Closed]]
+}, Open  ]]
+},
+WindowSize->{1920, 1007},
+WindowMargins->{{-8, Automatic}, {Automatic, -8}},
+Magnification:>1.2 Inherited,
+FrontEndVersion->"10.1 for Microsoft Windows (64-bit) (March 23, 2015)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 179, 2, 108, "Title"],
+Cell[CellGroupData[{
+Cell[784, 28, 104, 1, 76, "Section"],
+Cell[891, 31, 327, 6, 58, "Text"],
+Cell[1221, 39, 699, 18, 60, "Input"],
+Cell[1923, 59, 221, 5, 36, "Input"],
+Cell[2147, 66, 3692, 85, 566, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5876, 156, 140, 2, 76, "Section"],
+Cell[6019, 160, 831, 13, 126, "Text"],
+Cell[6853, 175, 886, 16, 81, "Text"],
+Cell[7742, 193, 896, 25, 83, "Input"],
+Cell[8641, 220, 223, 4, 35, "Text"],
+Cell[8867, 226, 238, 6, 60, "Input"],
+Cell[9108, 234, 4081, 116, 313, "Input"],
+Cell[13192, 352, 169, 3, 35, "Text"],
+Cell[13364, 357, 418, 9, 83, "Input"],
+Cell[13785, 368, 505, 8, 58, "Text"],
+Cell[14293, 378, 784, 21, 60, "Input"],
+Cell[15080, 401, 1179, 35, 60, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[16296, 441, 168, 2, 76, "Section"],
+Cell[CellGroupData[{
+Cell[16489, 447, 126, 1, 51, "Subsection"],
+Cell[16618, 450, 176, 4, 35, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[16831, 459, 104, 1, 51, "Subsection"],
+Cell[16938, 462, 638, 12, 59, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[17613, 479, 109, 1, 51, "Subsection"],
+Cell[17725, 482, 247, 4, 35, "Text"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[18021, 492, 97, 1, 76, "Section"],
+Cell[18121, 495, 274, 5, 36, "Input"],
+Cell[18398, 502, 175, 3, 36, "Input"],
+Cell[18576, 507, 323, 7, 83, "Input"],
+Cell[18902, 516, 2394, 55, 451, "Input"],
+Cell[21299, 573, 604, 15, 60, "Input"]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

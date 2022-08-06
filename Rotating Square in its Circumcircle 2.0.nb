@@ -1,0 +1,436 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     16511,        427]
+NotebookOptionsPosition[     15825,        399]
+NotebookOutlinePosition[     16200,        415]
+CellTagsIndexPosition[     16157,        412]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Rotating Square in its Circumcircle 2.0", "Title",
+ CellChangeTimes->{{3.706489411304154*^9, 3.7064894329064493`*^9}, {
+  3.807810274748804*^9, 3.807810275509291*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Revising 1.0", "Section",
+ CellChangeTimes->{{3.8078134824052477`*^9, 3.8078134847729535`*^9}}],
+
+Cell["Make the original recreation code better.", "Text",
+ CellChangeTimes->{{3.8078139844387054`*^9, 3.8078139950980115`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{"Clear", "[", 
+  RowBox[{"circpts", ",", "leftpts", ",", "sqrpts", ",", "rotsqr"}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+   "Points", " ", "that", " ", "make", " ", "up", " ", "the", " ", "cirlce"}],
+    "*)"}], " ", 
+  RowBox[{
+   RowBox[{"circpts", "=", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"Cos", "[", "#", "]"}], ",", 
+         RowBox[{"Sin", "[", "#", "]"}]}], "}"}], "&"}], "@", 
+      RowBox[{"Range", "[", 
+       RowBox[{"0", ",", 
+        RowBox[{"2", "\[Pi]"}], ",", 
+        FractionBox["\[Pi]", "16"]}], "]"}]}], "//", "Transpose"}]}], ";"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"Let", "'"}], "s", " ", "make", " ", "a", " ", "square"}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Left", " ", "side", " ", "of", " ", "the", " ", "square"}], 
+   "*)"}], 
+  RowBox[{
+   RowBox[{"leftpts", "=", 
+    RowBox[{"Thread", "@", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "0.5"}], ",", 
+       RowBox[{"Range", "[", 
+        RowBox[{
+         RowBox[{"-", "0.5"}], ",", "0.5", ",", ".125"}], "]"}]}], "}"}]}]}], 
+   ";"}]}], "\n", 
+ RowBox[{
+  RowBox[{"sqrpts", "=", 
+   RowBox[{"Catenate", "@", 
+    RowBox[{"(*", 
+     RowBox[{
+     "Rotate", " ", "most", " ", "the", " ", "left", " ", "side", " ", "of", 
+      " ", "the", " ", "square", " ", "to", " ", "form", " ", "the", " ", 
+      "rest", " ", "of", " ", "the", " ", "sides"}], "*)"}], 
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{"RotationMatrix", "[", 
+          RowBox[{"k", " ", 
+           RowBox[{"\[Pi]", "/", "2"}]}], "]"}], ".", "#"}], "&"}], "/@", 
+       RowBox[{"Most", "@", "leftpts"}]}], ",", 
+      RowBox[{"{", 
+       RowBox[{"k", ",", "0", ",", "3"}], "}"}]}], "]"}]}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"rotsqr", "[", "t_", "]"}], "=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{"RotationMatrix", "[", "t", "]"}], ".", "#"}], "&"}], "/@", 
+    "sqrpts"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.807814598400668*^9, 3.80781460286592*^9}, {
+   3.807815280221939*^9, 3.807815299008127*^9}, 3.8078153319973335`*^9, {
+   3.8078153837394843`*^9, 3.80781539954578*^9}, {3.807815493509512*^9, 
+   3.8078155042911077`*^9}, {3.8078156499928246`*^9, 
+   3.8078156856944313`*^9}, {3.807815727012258*^9, 3.8078157804932175`*^9}, {
+   3.8078160100939617`*^9, 3.807816017485139*^9}, {3.807816545156312*^9, 
+   3.8078166413850574`*^9}, {3.8078170426881638`*^9, 3.8078170712410336`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Graphics", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"{", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"PointSize", "[", "0.025", "]"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"Thickness", "[", ".007", "]"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"(*", "Circle", "*)"}], " ", 
+     RowBox[{"{", 
+      RowBox[{"Orange", ",", 
+       RowBox[{"Point", "[", "circpts", "]"}]}], "}"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"(*", "Square", "*)"}], " ", 
+     RowBox[{"{", 
+      RowBox[{"Yellow", ",", 
+       RowBox[{"Point", "@", "sqrpts"}]}], "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"(*", "Lines", "*)"}], " ", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"Thickness", "[", ".007", "]"}], ",", 
+       RowBox[{"RGBColor", "[", 
+        RowBox[{"0", ",", ".5", ",", ".5"}], "]"}], ",", 
+       RowBox[{"Line", "@", 
+        RowBox[{"Transpose", "@", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"N", "@", "circpts"}], ",", 
+           RowBox[{"Join", "@@@", 
+            RowBox[{"Nearest", "[", 
+             RowBox[{"sqrpts", ",", "circpts"}], "]"}]}]}], "}"}]}]}]}], 
+      "}"}]}], "\[IndentingNewLine]", "}"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"Background", "\[Rule]", 
+    RowBox[{"Darker", "[", 
+     RowBox[{
+      RowBox[{"RGBColor", "[", 
+       RowBox[{"0", ",", ".25", ",", ".35"}], "]"}], ",", 
+      RowBox[{"3", "/", "5"}]}], "]"}]}], ",", "\[IndentingNewLine]", 
+   RowBox[{"PlotRangePadding", "\[Rule]", "0.1"}]}], "\[IndentingNewLine]", 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.807817214860367*^9, 3.8078172443105993`*^9}, {
+  3.8078172979525623`*^9, 3.807817300025111*^9}, {3.8078173519629087`*^9, 
+  3.8078173970578012`*^9}, {3.8078174521230154`*^9, 3.80781745783491*^9}, {
+  3.8078183063046713`*^9, 3.807818330534104*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"If", "[", "\[IndentingNewLine]", 
+    RowBox[{"spiro", ",", "\[IndentingNewLine]", 
+     RowBox[{"Graphics", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"{", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"PointSize", "[", "0.025", "]"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"Thickness", "[", ".007", "]"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"(*", "Circle", "*)"}], " ", 
+         RowBox[{"{", 
+          RowBox[{"Orange", ",", 
+           RowBox[{"Point", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{
+               RowBox[{"RotationMatrix", "[", 
+                RowBox[{"\[Omega]circ", " ", "t"}], "]"}], ".", "#"}], "&"}], 
+             "/@", "circpts"}], "]"}]}], "}"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"(*", "Square", "*)"}], " ", 
+         RowBox[{"{", 
+          RowBox[{"Yellow", ",", 
+           RowBox[{"Point", "@", 
+            RowBox[{"rotsqr", "[", 
+             RowBox[{
+              RowBox[{"-", "\[Omega]sqr"}], " ", "t"}], "]"}]}]}], "}"}], ",",
+          "\[IndentingNewLine]", 
+         RowBox[{"(*", "Lines", "*)"}], " ", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"Thickness", "[", ".007", "]"}], ",", 
+           RowBox[{"RGBColor", "[", 
+            RowBox[{"0", ",", ".5", ",", ".5"}], "]"}], ",", 
+           RowBox[{"Line", "@", 
+            RowBox[{"Transpose", "[", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{"#", ",", 
+                 RowBox[{"Join", "@@@", 
+                  RowBox[{"Nearest", "[", 
+                   RowBox[{
+                    RowBox[{"rotsqr", "[", 
+                    RowBox[{
+                    RowBox[{"-", "\[Omega]sqr"}], " ", "t"}], "]"}], ",", 
+                    "#"}], "]"}]}]}], "}"}], "&"}], "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{
+                 RowBox[{"RotationMatrix", "[", 
+                  RowBox[{"\[Omega]circ", " ", "t"}], "]"}], ".", "#"}], 
+                "&"}], "/@", "circpts"}], "]"}], "]"}]}]}], "}"}]}], 
+        "\[IndentingNewLine]", "}"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"Background", "\[Rule]", 
+        RowBox[{"Darker", "[", 
+         RowBox[{
+          RowBox[{"RGBColor", "[", 
+           RowBox[{"0", ",", ".25", ",", ".35"}], "]"}], ",", 
+          RowBox[{"3", "/", "5"}]}], "]"}]}], ",", "\[IndentingNewLine]", 
+       RowBox[{"PlotRangePadding", "\[Rule]", "0.1"}]}], 
+      "\[IndentingNewLine]", "]"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"Graphics", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"{", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"PointSize", "[", "0.025", "]"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"Thickness", "[", ".007", "]"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"(*", "Square", "*)"}], " ", 
+         RowBox[{"{", 
+          RowBox[{"Yellow", ",", 
+           RowBox[{"Point", "@", 
+            RowBox[{"rotsqr", "[", 
+             RowBox[{
+              RowBox[{"-", "\[Omega]sqr"}], " ", "t"}], "]"}]}]}], "}"}], ",",
+          "\[IndentingNewLine]", 
+         RowBox[{"(*", "Lines", "*)"}], " ", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"Thickness", "[", ".007", "]"}], ",", 
+           RowBox[{"RGBColor", "[", 
+            RowBox[{"0", ",", ".5", ",", ".5"}], "]"}], ",", 
+           RowBox[{"Line", "@", 
+            RowBox[{"Transpose", "[", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{"circpts", ",", 
+                 RowBox[{"Join", "@@@", 
+                  RowBox[{"Nearest", "[", 
+                   RowBox[{
+                    RowBox[{"rotsqr", "[", 
+                    RowBox[{
+                    RowBox[{"-", "\[Omega]sqr"}], " ", "t"}], "]"}], ",", 
+                    "#"}], "]"}]}]}], "}"}], "&"}], "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{
+                 RowBox[{"RotationMatrix", "[", 
+                  RowBox[{"\[Omega]circ", " ", "t"}], "]"}], ".", "#"}], 
+                "&"}], "/@", "circpts"}], "]"}], "]"}]}]}], "}"}]}], 
+        "\[IndentingNewLine]", "}"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"Background", "\[Rule]", 
+        RowBox[{"Darker", "[", 
+         RowBox[{
+          RowBox[{"RGBColor", "[", 
+           RowBox[{"0", ",", ".25", ",", ".35"}], "]"}], ",", 
+          RowBox[{"3", "/", "5"}]}], "]"}]}], ",", "\[IndentingNewLine]", 
+       RowBox[{"PlotRangePadding", "\[Rule]", "0.1"}]}], 
+      "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", "]"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{"spiro", ",", 
+     RowBox[{"{", 
+      RowBox[{"True", ",", "False"}], "}"}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{"t", ",", "0", ",", 
+     RowBox[{"2", "\[Pi]"}], ",", "Animator"}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\[Omega]circ", ",", "1"}], "}"}], ",", 
+     RowBox[{"-", "1"}], ",", "1"}], "}"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\[Omega]sqr", ",", "1"}], "}"}], ",", 
+     RowBox[{"-", "1"}], ",", "1"}], "}"}]}], "\[IndentingNewLine]", 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.807818395461849*^9, 3.807818436405301*^9}, {
+   3.8078185451232457`*^9, 3.807818547106471*^9}, {3.8078186154539714`*^9, 
+   3.8078186175430355`*^9}, {3.807818676323527*^9, 3.80781868404665*^9}, {
+   3.807818898135397*^9, 3.8078189655907574`*^9}, {3.807818996554415*^9, 
+   3.80781903001877*^9}, 3.8078192638632903`*^9, {3.807819401062475*^9, 
+   3.807819456291604*^9}, {3.807819494007025*^9, 3.807819538505516*^9}, {
+   3.8078203954749737`*^9, 3.807820439930908*^9}, {3.807820470322982*^9, 
+   3.807820544475815*^9}, {3.8078205792850094`*^9, 3.807820596132056*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"With", "[", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"\[Omega]circ", "=", "1"}], ",", 
+      RowBox[{"\[Omega]sqr", "=", 
+       RowBox[{"-", "1"}]}]}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{"Table", "[", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"Graphics", "[", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"{", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"PointSize", "[", "0.025", "]"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"Thickness", "[", ".007", "]"}], ",", "\[IndentingNewLine]", 
+          RowBox[{"(*", "Circle", "*)"}], " ", 
+          RowBox[{"{", 
+           RowBox[{"Orange", ",", 
+            RowBox[{"Point", "[", "circpts", "]"}]}], "}"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"(*", "Square", "*)"}], " ", 
+          RowBox[{"{", 
+           RowBox[{"Yellow", ",", 
+            RowBox[{"Point", "@", 
+             RowBox[{"rotsqr", "[", 
+              RowBox[{
+               RowBox[{"-", "\[Omega]sqr"}], " ", "t"}], "]"}]}]}], "}"}], 
+          ",", "\[IndentingNewLine]", 
+          RowBox[{"(*", "Lines", "*)"}], " ", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"Thickness", "[", ".007", "]"}], ",", 
+            RowBox[{"RGBColor", "[", 
+             RowBox[{"0", ",", ".5", ",", ".5"}], "]"}], ",", 
+            RowBox[{"Line", "@", 
+             RowBox[{"Transpose", "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{"circpts", ",", 
+                  RowBox[{"Join", "@@@", 
+                   RowBox[{"Nearest", "[", 
+                    RowBox[{
+                    RowBox[{"rotsqr", "[", 
+                    RowBox[{
+                    RowBox[{"-", "\[Omega]sqr"}], " ", "t"}], "]"}], ",", 
+                    "#"}], "]"}]}]}], "}"}], "&"}], "[", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"RotationMatrix", "[", 
+                   RowBox[{"\[Omega]circ", " ", "t"}], "]"}], ".", "#"}], 
+                 "&"}], "/@", "circpts"}], "]"}], "]"}]}]}], "}"}]}], 
+         "\[IndentingNewLine]", "}"}], ",", "\[IndentingNewLine]", 
+        RowBox[{"Background", "\[Rule]", 
+         RowBox[{"Darker", "[", 
+          RowBox[{
+           RowBox[{"RGBColor", "[", 
+            RowBox[{"0", ",", ".25", ",", ".35"}], "]"}], ",", 
+           RowBox[{"3", "/", "5"}]}], "]"}]}], ",", "\[IndentingNewLine]", 
+        RowBox[{"PlotRangePadding", "\[Rule]", "0.1"}]}], 
+       "\[IndentingNewLine]", "]"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"{", 
+       RowBox[{"t", ",", "0.", ",", 
+        RowBox[{"2", "\[Pi]"}], ",", 
+        RowBox[{"2", 
+         RowBox[{"\[Pi]", "/", "100"}]}]}], "}"}]}], "\[IndentingNewLine]", 
+     "]"}]}], "\[IndentingNewLine]", "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"ListAnimate", "@", "%"}], "\[IndentingNewLine]", 
+    RowBox[{"SystemOpen", "@", 
+     RowBox[{"Export", "[", 
+      RowBox[{
+      "\"\<C:\\\\Users\\\\Nathan Chapman\\\\Desktop\\\\Aperture.gif\>\"", ",",
+        "%%", ",", 
+       RowBox[{"\"\<DisplayDurations\>\"", "\[Rule]", 
+        RowBox[{"3.", "/", "100"}]}]}], "]"}]}]}], "*)"}]}]}], "Input",
+ CellChangeTimes->{{3.80782453091893*^9, 3.8078245361622553`*^9}, {
+   3.8078247151350193`*^9, 3.8078247597452173`*^9}, {3.8078248111544485`*^9, 
+   3.807824830889385*^9}, {3.8078248620846095`*^9, 3.8078248694435287`*^9}, {
+   3.807824978049405*^9, 3.8078250017572446`*^9}, {3.807825041758835*^9, 
+   3.8078250666900997`*^9}, {3.807825132595204*^9, 3.8078251627725534`*^9}, {
+   3.8078253891003094`*^9, 3.8078253911076946`*^9}, {3.807825444232357*^9, 
+   3.8078254523370967`*^9}, {3.807825541325843*^9, 3.8078255432727294`*^9}, {
+   3.80782575903577*^9, 3.8078257655623403`*^9}, 3.807826379781689*^9, 
+   3.820513646259694*^9, {3.8205137231157646`*^9, 3.8205137799769754`*^9}, 
+   3.820513965179023*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Accurate Recreation", "Section",
+ CellChangeTimes->{{3.8078134900847063`*^9, 3.8078134949323463`*^9}}],
+
+Cell["Actually make the inner dots move in circles", "Text",
+ CellChangeTimes->{{3.80781401011331*^9, 3.8078140194166784`*^9}}]
+}, Closed]]
+}, Open  ]]
+},
+WindowSize->{1920, 1007},
+WindowMargins->{{-8, Automatic}, {Automatic, -8}},
+Magnification:>1.1 Inherited,
+FrontEndVersion->"10.1 for Microsoft Windows (64-bit) (March 23, 2015)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 173, 2, 99, "Title"],
+Cell[CellGroupData[{
+Cell[778, 28, 101, 1, 69, "Section"],
+Cell[882, 31, 127, 1, 32, "Text"],
+Cell[1012, 34, 2640, 74, 158, "Input"],
+Cell[3655, 110, 1834, 42, 233, "Input"],
+Cell[5492, 154, 5990, 139, 613, "Input"],
+Cell[11485, 295, 4037, 91, 393, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[15559, 391, 108, 1, 69, "Section"],
+Cell[15670, 394, 127, 1, 35, "Text"]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
