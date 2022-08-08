@@ -1,15 +1,18 @@
+import java.util.ArrayList;
+
 public class Planet {
+  // Instrinsic properties
   public boolean colonized = false;
   public String name;
-  public ArrayList<String> needs = new ArrayList<String>;
-  public ArrayList<String> gives = new ArrayList<String>;
-  public ArrayList<String> connections = new ArrayList<String>;
-  public static ArrayList<String> planet_list = new ArrayList<String>;
+  public ArrayList<String> needs = new ArrayList<String>();
+  public ArrayList<String> gives = new ArrayList<String>();
+  // Extrinsic properties
+  public ArrayList<Planet> connections = new ArrayList<Planet>();
 
   public Planet(ArrayList<String> needs, ArrayList<String> gives) {
     this.needs = needs;
     this.gives = gives;
-    planet_list.add(this)
+    PlanetSystem.planets.add(this);
   }
 
   public void colonize() {
