@@ -1,8 +1,10 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Planet {
   // Instrinsic properties
-  public boolean colonized = false;
+  private boolean discovered = false;
+  private boolean colonized = false;
   public String name;
   public ArrayList<String> needs = new ArrayList<String>();
   public ArrayList<String> gives = new ArrayList<String>();
@@ -12,7 +14,11 @@ public class Planet {
   public Planet(ArrayList<String> needs, ArrayList<String> gives) {
     this.needs = needs;
     this.gives = gives;
-    PlanetSystem.planets.add(this);
+    PlanetSystem.addPlanet(this);
+  }
+
+  public void discover () {
+    this.discovered = true;
   }
 
   public void colonize() {
@@ -20,8 +26,10 @@ public class Planet {
   }
 
   public void connect(Planet p) {
-    this.connections.add(p);
-    p.connections.add(this);
+    //PlanetSystem
+
+    /*this.connections.add(p);
+    p.connections.add(this);*/
   }
 
   public boolean isConnected(Planet p) {
@@ -29,8 +37,22 @@ public class Planet {
   }
 
   public void trade(Planet p){
-    if(this.connections.contains(p)) {
-      
+    boolean tradeTo, tradeFrom;
+    if(
+      // are they connected?
+      this.connections.contains(p) && (
+        // can this give?
+        (tradeTo = !Collections.disjoint(this.gives, p.needs)) ||
+        // can this receive?
+        !Collections.disjoint(this.needs, p.gives)
+      )
+    ) {
+      if (tradeTo) {
+
+      }
+      else {
+
+      }
     }
   }
 
