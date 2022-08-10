@@ -8,8 +8,8 @@ import java.util.ArrayList;
 
 public class PlanetSystem {
 // CLASS VARIABLES
-  public  static ArrayList<Planet> planets;
-  private static ArrayList<ArrayList<String> > network;
+  public ArrayList<Planet> planets;
+  private ArrayList<ArrayList<String> > network;
 
 // METHODS
   // create an empty planetary system
@@ -23,21 +23,33 @@ public class PlanetSystem {
     }
   }
 
-  private static void extendGraph () {
+  // add a new row and column to the network adjacency matrix
+  private void extendNetwork () {
     network.forEach((row) -> row.add("")); // tack on another element at the end of each  row
     network.add(new ArrayList<String>(network.size() + 1));    // add another row
     network.get(network.size() - 1).set(network.size() - 1, ""); // initialize the last element of the new row
   }
 
-  private static void updateGraph (Planet p) {
-    extendGraph();
+  // when a
+  public void addPlanet (Planet p) {
+    p.discover();
+    planets.add(p);
+    extendNetwork();
+  }
+
+  // TODO: add  planet connecting
+  public void addConnection (Planet p1, Planet p2) {
+    p1.connect(p2);
 
   }
 
-  public static void addPlanet (Planet p) {
-    planets.add(p);
-    extendGraph();
+  // trade between planets
+  public void trade(Planet p){
 
-    // TODO: add network adjacency matrix
+  }
+
+  public static void main(String[] args) {
+    PlanetSystem empire = new PlanetSystem();
+    System.out.println(empire.planets);
   }
 }
