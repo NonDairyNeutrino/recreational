@@ -4,6 +4,6 @@ Author: Nathan Chapman
 Date: 8/26/2022
 */
 
-public class SlipwaysFrontEnd {
-  
+public class SlipwaysUI {
+
 }
