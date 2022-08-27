@@ -34,12 +34,19 @@ public class Slipways {
 
   private static String seedText = "Please enter a seed for planet generation.  If you want a random seed, simply press 'Enter'";
 
-  public static void main(String[] args) {
+  private static void welcome () {
     System.out.println(initPrompt); // Display initial welcome and instructions.
+  }
 
+  private static Random getRNG () {
     System.out.println(seedText);    // Display seed prompt
     int seed = SlipwaysUI.getSeed(); // get seed
-    rng = new Random(seed);          // get planet rng
+    return new Random(seed);          // get planet rng
+  }
+
+  public static void main(String[] args) {
+    welcome();
+    rng = getRNG();
 
     PlanetSystem systemFull = new PlanetSystem();
     for (int k = 0; k < 100; k++) {
