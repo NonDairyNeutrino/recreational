@@ -12,13 +12,14 @@ public class Planet {
   // Extrinsic properties
   public ArrayList<Planet> connections = new ArrayList<Planet>();
 
-  public Planet(ArrayList<String> needs, ArrayList<String> gives) {
-    this.needs = needs;
-    this.gives = gives;
+  public Planet(int id) {
+    this.id    = id;
   }
 
   public void discover () {
     this.discovered = true;
+    this.needs = needs;
+    this.gives = gives;
   }
 
   public void colonize() {
