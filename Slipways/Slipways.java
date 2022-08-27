@@ -20,7 +20,11 @@ Outline
 5) goto step 2 and loop!
 */
 
+import java.util.Random;
+
 public class Slipways {
+
+  private static Random rng;
 
   private static String initPrompt = "Welcome to (text-based) Slipways; where you can build your interplanetary trade empire!/nTo begin you can either specify a seed for planet generation, or you can use a randomly generated one.";
 
@@ -33,8 +37,14 @@ public class Slipways {
   public static void main(String[] args) {
     System.out.println(initPrompt); // Display initial welcome and instructions.
 
-    System.out.println(seedText); // Display seed prompt
+    System.out.println(seedText);    // Display seed prompt
+    int seed = SlipwaysUI.getSeed(); // get seed
+    rng = new Random(seed);          // get planet rng
 
-    // TODO: get seed and build planet system
+    PlanetSystem systemFull = new PlanetSystem();
+    for (int k = 0; k < 100; k++) {
+      systemFull.addPlanet(new Planet(rng.nextInt()));
+    }
+    // TODO: build planet system
   }
 }
