@@ -15,9 +15,9 @@ public class PlanetSystem {
   // create an empty planetary system
   public PlanetSystem () {
     // initialize system with 0 planets
-    planets = new ArrayList<Planet>();
+    planets = new ArrayList<Planet>(0);
     // initialize system with a null network adjacency matrix
-    network   = new ArrayList<ArrayList<String> >();
+    network   = new ArrayList<ArrayList<String> >(0);
     for (int k = 0; k < network.size(); k++) {
       network.set(k, new ArrayList<String>());
     }
@@ -32,10 +32,8 @@ public class PlanetSystem {
 
   // when a
   public void addPlanet (Planet p) {
-    p.discover();
     planets.add(p);
     extendNetwork();
-    
   }
 
   // TODO: add  planet connecting
