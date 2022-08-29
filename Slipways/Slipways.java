@@ -26,11 +26,9 @@ public class Slipways {
 
   private static Random rng;
 
-  private static String helpText = "";
+  //private static String helpText = ""
 
-  private static String controlsText = "";
-
-  private static String seedText = "Please enter a seed for planet generation.  If you want a random seed, simply press 'Enter'";
+  //private static String controlsText = "";
 
   private static void welcome () {
     System.out.println("Welcome to (text-based) Slipways; where you can build your interplanetary trade empire!");
@@ -38,18 +36,22 @@ public class Slipways {
   }
 
   private static Random getRNG () {
+    String seedText = "Please enter a seed for planet generation.  If you want a random seed, simply press 'Enter'";
     System.out.println(seedText);    // Display seed prompt
     int seed = SlipwaysUI.getSeed(); // get seed
     return new Random(seed);          // get planet rng
   }
 
-  public static void main(String[] args) {
-    welcome();
-    rng = getRNG();
-
+  private static void initPlanetSystem () {
     PlanetSystem systemFull = new PlanetSystem(); // create an empty space
     for (int k = 0; k < 100; k++) {
       systemFull.addPlanet(new Planet(rng.nextInt())); // fill the space with planets, each with random ids
     }
+  }
+
+  public static void main(String[] args) {
+    welcome();
+    rng = getRNG();
+    initPlanetSystem();
   }
 }
