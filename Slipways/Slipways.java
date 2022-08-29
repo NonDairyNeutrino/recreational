@@ -7,9 +7,9 @@ Date: 8/26/2022
 /*
 Outline
 -------
-1) TODO: Print initial prompt and introduction to the game ex. "Welcome to (text-based) Slipways where you can build your interplanetary trade empire!"
+1) Print initial prompt and introduction to the game ex. "Welcome to (text-based) Slipways where you can build your interplanetary trade empire!"
 
-2) TODO: Generate random planets via a seed.  Seed can be given or random.
+2) Generate random planets via a seed.  Seed can be given or random.
 
 2) TODO: Get user inputted actions e.g. discover, colonize, connect, trade.
 
@@ -26,8 +26,6 @@ public class Slipways {
 
   private static Random rng;
 
-  private static String initPrompt = "Welcome to (text-based) Slipways; where you can build your interplanetary trade empire!/nTo begin you can either specify a seed for planet generation, or you can use a randomly generated one.";
-
   private static String helpText = "";
 
   private static String controlsText = "";
@@ -35,7 +33,8 @@ public class Slipways {
   private static String seedText = "Please enter a seed for planet generation.  If you want a random seed, simply press 'Enter'";
 
   private static void welcome () {
-    System.out.println(initPrompt); // Display initial welcome and instructions.
+    System.out.println("Welcome to (text-based) Slipways; where you can build your interplanetary trade empire!");
+    System.out.println("To begin you can either specify a seed for planet generation, or you can use a randomly generated one.");
   }
 
   private static Random getRNG () {
@@ -48,10 +47,9 @@ public class Slipways {
     welcome();
     rng = getRNG();
 
-    PlanetSystem systemFull = new PlanetSystem();
+    PlanetSystem systemFull = new PlanetSystem(); // create an empty space
     for (int k = 0; k < 100; k++) {
-      systemFull.addPlanet(new Planet(rng.nextInt()));
+      systemFull.addPlanet(new Planet(rng.nextInt())); // fill the space with planets, each with random ids
     }
-    // TODO: build planet system
   }
 }
