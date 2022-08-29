@@ -44,7 +44,8 @@ public class Slipways {
 
   private static void initPlanetSystem () {
     PlanetSystem systemFull = new PlanetSystem(); // create an empty space
-    for (int k = 0; k < 100; k++) {
+    System.out.println(systemFull.network);
+    for (int k = 0; k < 10; k++) {
       systemFull.addPlanet(new Planet(rng.nextInt())); // fill the space with planets, each with random ids
     }
   }

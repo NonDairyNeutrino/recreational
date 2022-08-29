@@ -6,14 +6,14 @@ public class Planet {
   public String name;
   private int id;
   public boolean discovered = false;
-  public boolean colonized = false;
+  public boolean colonized  = false;
   public ArrayList<String> needs = new ArrayList<String>();
   public ArrayList<String> gives = new ArrayList<String>();
   // Extrinsic properties
   public ArrayList<Planet> connections = new ArrayList<Planet>();
 
   public Planet(int id) {
-    this.id    = id;
+    this.id = id;
   }
 
   public void discover () {
