@@ -29,6 +29,23 @@ public class Slipways {
   public static void main(String[] args) {
     SlipwaysUI.welcome();
     rng = SlipwaysUI.getRNG();
-    System.out.println(rng.nextInt());
+
+    String input;
+    System.out.print("Action: ");
+    while (!(input = SlipwaysUI.sc.nextLine()).equals("quit")) {
+      // input can be one of "probe", "discover", "connect", etc.
+      switch (input) {
+        case "probe":
+          System.out.println("probe out");
+          break;
+        case "discover":
+          System.out.println("discover out");
+          break;
+        case "connect":
+          System.out.println("connect out");
+          break;
+      }
+      System.out.print("Action: ");
+    }
   }
 }

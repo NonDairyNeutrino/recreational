@@ -8,7 +8,7 @@ import java.util.Scanner;
 import java.util.Random;
 
 public class SlipwaysUI {
-  private static Scanner sc = new Scanner(System.in);
+  public static Scanner sc = new Scanner(System.in);
   private static Random rng = new Random();
 
   //private static String helpText = ""
