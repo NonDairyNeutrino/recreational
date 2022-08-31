@@ -31,7 +31,7 @@ public class Slipways {
     rng = SlipwaysUI.getRNG();
 
     String input;
-    System.out.print("Action: ");
+    SlipwaysUI.actionPrompt();
     while (!(input = SlipwaysUI.sc.nextLine()).equals("quit")) {
       // input can be one of "probe", "discover", "connect", etc.
       switch (input) {
@@ -45,7 +45,7 @@ public class Slipways {
           System.out.println("connect out");
           break;
       }
-      System.out.print("Action: ");
+      SlipwaysUI.actionPrompt();
     }
   }
 }

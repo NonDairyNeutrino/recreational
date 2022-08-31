@@ -39,7 +39,7 @@ public class PlanetSystem {
   public void addPlanet (Planet p) {
     planets.add(p);
     extendNetwork();
-    network.
+    //network.
   }
 
   // TODO: add  planet connecting

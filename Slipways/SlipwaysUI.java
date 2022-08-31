@@ -15,7 +15,13 @@ public class SlipwaysUI {
 
   //private static String controlsText = "";
 
+  public static void splash () {
+    String splashText = "========================\n        SLIPWAYS        \n========================";
+    System.out.println(splashText);
+  }
+
   public static void welcome () {
+    splash();
     System.out.println("Welcome to (text-based) Slipways; where you can build your interplanetary trade empire!");
     System.out.println("To begin you can either specify a seed for planet generation, or you can use a randomly generated one.");
   }
@@ -38,6 +44,11 @@ public class SlipwaysUI {
     System.out.println(seedText);    // Display seed prompt
     int seed = getSeed(); // get seed
     return new Random(seed);          // get planet rng
+  }
+
+  public static void actionPrompt () {
+    String actPrompt = "Enter one of the following actions: probe, discover, connect.";
+    System.out.println(actPrompt);
   }
 
 }
