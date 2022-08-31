@@ -42,13 +42,27 @@ public class SlipwaysUI {
   public static Random getRNG () {
     String seedText = "Please enter an integer seed for planet generation.  If you want a random seed, simply press 'Enter'";
     System.out.println(seedText);    // Display seed prompt
+    System.out.print("Seed: ");
     int seed = getSeed(); // get seed
     return new Random(seed);          // get planet rng
   }
 
   public static void actionPrompt () {
-    String actPrompt = "Enter one of the following actions: probe, discover, connect.";
+    String actPrompt = "Enter one of the following actions: probe, discover, connect, or quit.";
     System.out.println(actPrompt);
+  }
+
+  public static void showActions () {
+    System.out.println("INFORMATION\n===========");
+    System.out.println("board: displays the state of the game board.");
+    System.out.println("state: performs the 'board' action.");
+
+    System.out.println("ACTIONS\n=======");
+    System.out.println("probe: potentially reveals more planets.");
+    System.out.println("discover: reveals planet's properties.");
+    System.out.println("connect: connects two planets and begins trade if possible.");
+
+    System.out.println("");
   }
 
 }
